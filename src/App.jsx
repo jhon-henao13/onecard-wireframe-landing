@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Solutions from './components/Solutions'
 import ComparisonTable from './components/ComparisonTable'
+import AppShowcase from './components/AppShowcase'
 import Footer from './components/Footer'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Hero />
       <Solutions />
       <ComparisonTable />
+      <AppShowcase />
       <Footer />
     </div>
   )
