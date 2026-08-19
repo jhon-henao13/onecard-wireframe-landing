@@ -228,7 +228,7 @@ const Hero = () => {
                 scale: { duration: 0.6, delay: 0.8 },
                 y: { duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.3 }
               }}
-              className="absolute top-[5%] right-[33%] w-[13%] max-w-[55px] h-auto object-contain drop-shadow-lg z-20 pointer-events-none"
+              className="absolute top-[3%] right-[33%] w-[13%] max-w-[55px] h-auto object-contain drop-shadow-lg z-20 pointer-events-none"
             />
 
             {/* 5. Icono SAT */}
@@ -246,7 +246,7 @@ const Hero = () => {
                 scale: { duration: 0.6, delay: 1 },
                 y: { duration: 4.8, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.7 }
               }}
-              className="absolute top-[20%] right-[10%] w-[13%] max-w-[55px] h-auto object-contain drop-shadow-lg z-20 pointer-events-none"
+              className="absolute top-[16%] right-[10%] w-[13%] max-w-[55px] h-auto object-contain drop-shadow-lg z-20 pointer-events-none"
             />
 
           </div>
