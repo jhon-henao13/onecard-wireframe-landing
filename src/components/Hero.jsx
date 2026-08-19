@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import cardBlue from '../assets/hero-right/card-blue.png';
-import cardRed from '../assets/hero-right/card-red.png';
-import cardGreen from '../assets/hero-right/card-green.png';
-import cnbvIcon from '../assets/hero-right/cnbv-icon.png';
-import satIcon from '../assets/hero-right/sat-icon.png';
+import cardBlue from '../assets/hero-right/card-blue.webp';
+import cardRed from '../assets/hero-right/card-red.webp';
+import cardGreen from '../assets/hero-right/card-green.webp';
+import cnbvIcon from '../assets/hero-right/cnbv-icon.webp';
+import satIcon from '../assets/hero-right/sat-icon.webp';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50, scale: 0.9 },

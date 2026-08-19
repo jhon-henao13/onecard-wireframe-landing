@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 // Importación del logo de One Card
-import onecardLogo from '../assets/onecard-logo-recortado.png';
+import onecardLogo from '../assets/onecard-logo-recortado.webp';
 
 // Datos de la tabla comparativa
 const COMPARISON_DATA = [

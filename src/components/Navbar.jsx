@@ -1,7 +1,7 @@
 // src/components/Navbar.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logoOnecard from '../assets/onecard-logopng.png';
+import logoOnecard from '../assets/onecard-logopng.webp';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

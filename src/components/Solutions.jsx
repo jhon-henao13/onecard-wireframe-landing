@@ -3,11 +3,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 // Importación de imágenes requeridas
-import cardGreen from '../assets/hero-right/card-green.png';
-import cardRed from '../assets/hero-right/card-red.png';
-import cardBlack from '../assets/card-black.png';
-import cardBlue from '../assets/hero-right/card-blue.png';
-import cardBlueBack from '../assets/card-blue-back.png';
+import cardGreen from '../assets/hero-right/card-green.webp';
+import cardRed from '../assets/hero-right/card-red.webp';
+import cardBlack from '../assets/card-black.webp';
+import cardBlue from '../assets/hero-right/card-blue.webp';
+import cardBlueBack from '../assets/card-blue-back.webp';
 
 // Icono personalizado para las viñetas (doble check/spark premium)
 const FeatureIcon = () => (
