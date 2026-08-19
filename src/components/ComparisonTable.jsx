@@ -93,7 +93,7 @@ const ComparisonTable = () => {
                   {/* Columna 3: ONE CARD (Destacada) */}
                   <th className="w-[35%] relative p-0 sm:p-0 bg-gradient-to-b from-slate-900 to-onecard-dark text-white rounded-t-2xl">
                     {/* Badge de Ganador */}
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#00b7eb] text-slate-950 font-extrabold text-[10px] sm:text-xs px-3 py-0.5 rounded-full uppercase tracking-wider shadow-md">
+                    <div className="absolute -top-0 left-1/2 -translate-x-1/2 bg-[#00b7eb] text-white font-extrabold text-[10px] sm:text-xs px-3 py-0.5 rounded-md uppercase tracking-wider shadow-md">
                       Mejor Opción
                     </div>
 
