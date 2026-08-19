@@ -66,10 +66,10 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen w-full pt-[10rem] pb-[10rem] bg-hero-gradient flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen w-full pt-[10rem] max-[600px]:pt-2 pb-[10rem] max-[600px]:pb-24 bg-hero-gradient flex items-center justify-center overflow-hidden">
       
       {/* Contenedor Principal */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-4 items-start w-full">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-4 max-[600px]:gap-12 items-start w-full">
         
         {/* Text Content */}
         <motion.div
