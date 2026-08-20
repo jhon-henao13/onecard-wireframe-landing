@@ -7,6 +7,8 @@ import AppShowcase from './components/AppShowcase'
 import SavingsCalculator from './components/SavingsCalculator'
 import ImplementationProcess from './components/ImplementationProcess'
 import TestimonialsMarquee from './components/TestimonialsMarquee'
+import FAQSection from './components/FAQSection'
+import CTASection from './components/CTASection'
 import Footer from './components/Footer'
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
       <SavingsCalculator />
       <ImplementationProcess />
       <TestimonialsMarquee />
+      <FAQSection />
+      <CTASection />
       <Footer />
     </div>
   )
