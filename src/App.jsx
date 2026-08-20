@@ -6,6 +6,7 @@ import ComparisonTable from './components/ComparisonTable'
 import AppShowcase from './components/AppShowcase'
 import SavingsCalculator from './components/SavingsCalculator'
 import ImplementationProcess from './components/ImplementationProcess'
+import TestimonialsMarquee from './components/TestimonialsMarquee'
 import Footer from './components/Footer'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <AppShowcase />
       <SavingsCalculator />
       <ImplementationProcess />
+      <TestimonialsMarquee />
       <Footer />
     </div>
   )
