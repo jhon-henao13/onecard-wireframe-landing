@@ -30,7 +30,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop CTA Button */}
-        <button className="hidden md:block bg-[#00b7eb] hover:bg-[#00b7eb]/90 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+        <button className="hidden md:block bg-[#00b7eb] hover:bg-[#00b7eb]/90 text-white text-sm font-semibold px-5 py-3 rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98]">
           Hablar con un asesor
         </button>
 

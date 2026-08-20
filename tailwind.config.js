@@ -14,7 +14,7 @@ export default {
         'onecard-accent': '#00b7eb' // Verde azulado/teal acento premium
       },
       backgroundImage: {
-        'hero-gradient': 'linear-gradient(to right, #00253E, #005C94)', // Degradado del Hero
+        'hero-gradient': 'linear-gradient(to right, #00253E, #00629b)', // Degradado del Hero
       }
     },
   },

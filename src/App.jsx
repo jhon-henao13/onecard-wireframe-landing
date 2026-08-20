@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import Solutions from './components/Solutions'
 import ComparisonTable from './components/ComparisonTable'
 import AppShowcase from './components/AppShowcase'
+import SavingsCalculator from './components/SavingsCalculator'
 import Footer from './components/Footer'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Solutions />
       <ComparisonTable />
       <AppShowcase />
+      <SavingsCalculator />
       <Footer />
     </div>
   )
