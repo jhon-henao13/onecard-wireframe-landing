@@ -66,22 +66,22 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen w-full pt-[10rem] max-[600px]:pt-2 pb-[10rem] max-[600px]:pb-24 bg-hero-gradient flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen w-full pt-[10rem] max-[600px]:pt-2 pb-[10rem] max-[600px]:pb-48 bg-hero-gradient flex items-center justify-center overflow-hidden">
       
       {/* Contenedor Principal */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-4 max-[600px]:gap-12 items-start w-full">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 max-[600px]:gap-12 items-start w-full">
         
         {/* Text Content */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={cardVariants}
-          className="lg:col-span-7 space-y-6 mt-10"
+          className="lg:col-span-7 space-y-6 mt-10 max-[600px]:mt-28"
         >
           <p className="text-white/90 font-light text-xl">Despensa y Combustible</p>
           
           {/* H1 con Animación de Barrido Vertical en el span */}
-          <h1 className="text-3xl sm:text-4xl lg:text-[2.8rem] !mt-4 font-bold !leading-[1.4] text-white">
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.8rem] max-[570px]:text-[1.6rem] !mt-4 font-bold !leading-[1.4] text-white">
             Monederos corporativos con{' '}
             <span className="inline-block relative overflow-hidden h-[1.3em] align-bottom">
               <AnimatePresence mode="wait">
@@ -172,7 +172,7 @@ const Hero = () => {
                 y: { duration: 5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }
               }}
               whileHover={{ scale: 1.05, zIndex: 40 }}
-              className="absolute top-[2%] left-[2%] w-[50%] h-auto object-contain drop-shadow-xl z-10 cursor-pointer transition-shadow"
+              className="absolute top-[2%] left-[2%] w-[40%] max-[800px]:w-[40%] min-[800px]:w-[50%] h-auto object-contain drop-shadow-xl z-10 cursor-pointer transition-shadow"
             />
 
             {/* 2. Tarjeta Roja (Centro / Gasolina Premium) */}
@@ -191,7 +191,7 @@ const Hero = () => {
                 y: { duration: 5.8, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.5 }
               }}
               whileHover={{ scale: 1.05, zIndex: 40 }}
-              className="absolute top-[20%] left-[25%] w-[50%] h-auto object-contain drop-shadow-2xl z-20 cursor-pointer transition-shadow"
+              className="absolute top-[20%] left-[25%] w-[40%] max-[800px]:w-[40%] min-[800px]:w-[50%] h-auto object-contain drop-shadow-2xl z-20 cursor-pointer transition-shadow"
             />
 
             {/* 3. Tarjeta Verde (Frente / Gasolina Magna) */}
@@ -210,7 +210,7 @@ const Hero = () => {
                 y: { duration: 4.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 1 }
               }}
               whileHover={{ scale: 1.05, zIndex: 40 }}
-              className="absolute top-[35%] left-[50%] w-[50%] h-auto object-contain drop-shadow-2xl z-30 cursor-pointer transition-shadow"
+              className="absolute top-[35%] left-[50%] w-[40%] max-[800px]:w-[40%] min-[800px]:w-[50%] h-auto object-contain drop-shadow-2xl z-30 cursor-pointer transition-shadow"
             />
 
             {/* 4. Icono CNBV */}
