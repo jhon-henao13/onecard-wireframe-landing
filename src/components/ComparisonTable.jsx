@@ -39,7 +39,7 @@ const COMPARISON_DATA = [
   },
 ];
 
-const ComparisonTable = () => {
+const ComparisonTable = ({ onOpenModal }) => {
   return (
     <section className="py-20 lg:py-28 px-4 sm:px-6 md:px-12 bg-hero-gradient text-white relative overflow-hidden">
       
@@ -152,7 +152,17 @@ const ComparisonTable = () => {
                       whileTap={{ scale: 0.98 }}
                       className="w-full h-full py-5 px-4 bg-onecard-sky text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all cursor-pointer shadow-inner"
                     >
-                      <span>Cambiar a ONE CARD sin costo de emisión</span>
+                      
+                      <motion.div 
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                        onClick={() => onOpenModal?.('')}
+                        className="bg-transparent text-white font-semibold rounded-lg transition-all text-sm sm:text-base cursor-pointer"
+                        >
+                          Cambiar a ONE CARD sin costo de emisión
+
+                      </motion.div>
+                      
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>

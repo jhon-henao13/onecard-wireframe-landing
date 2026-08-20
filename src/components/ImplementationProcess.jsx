@@ -44,7 +44,7 @@ const STEPS = [
   }
 ];
 
-const ImplementationProcess = () => {
+const ImplementationProcess = ({ onOpenModal }) => {
   return (
     <section className="py-20 lg:py-28 px-4 sm:px-6 md:px-12 bg-slate-50 text-slate-800 relative overflow-hidden">
       
@@ -152,12 +152,21 @@ const ImplementationProcess = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-center pt-2"
         >
-          <a
-            href="#contacto"
-            className="inline-flex items-center justify-center bg-[#0097DA] hover:bg-[#0082bd] text-white font-bold text-base px-8 py-4 rounded-2xl shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+          {/* Cambiamos motion.button por motion.div para evitar el error de anidación */}
+          <motion.div 
+            whileHover={{ scale: 1.02 }} 
+            whileTap={{ scale: 0.98 }}
           >
-            Agenda tu demo
-          </a>
+            <button
+              onClick={() => {
+                // Eliminamos setIsOpen(false) porque no existe aquí
+                onOpenModal();
+              }}
+              className="inline-flex items-center justify-center bg-[#0097DA] hover:bg-[#0082bd] text-white font-bold text-base px-8 py-4 rounded-2xl shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+            >
+              Agenda tu demo
+            </button>
+          </motion.div>
         </motion.div>
 
       </div>

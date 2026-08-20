@@ -24,7 +24,7 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
-const Solutions = () => {
+const Solutions = ({ onOpenModal }) => {
   return (
     <section className="bg-white text-slate-800 py-20 lg:py-28 px-6 md:px-12 relative overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-20 lg:space-y-28">
@@ -82,6 +82,7 @@ const Solutions = () => {
             <motion.button 
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              onClick={() => onOpenModal?.('')}
               className="bg-[#00b7eb] hover:bg-[#0097DA] text-white font-semibold px-8 py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all text-sm sm:text-base cursor-pointer"
             >
               Agenda tu demo
@@ -228,6 +229,7 @@ const Solutions = () => {
             <motion.button 
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              onClick={() => onOpenModal?.('')}
               className="bg-[#00b7eb] hover:bg-[#0097DA] text-white font-semibold px-8 py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all text-sm sm:text-base cursor-pointer"
             >
               Agenda tu demo

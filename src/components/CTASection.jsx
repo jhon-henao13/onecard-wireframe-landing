@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 // Importación de la ilustración de la mano
 import handImg from '../assets/hand-blue-beforefooter.png';
 
-const CTASection = () => {
+
+const CTASection = ({ onOpenModal }) => {
   return (
     <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 md:px-12 bg-[#00629b] text-white relative overflow-hidden">
       
@@ -28,12 +29,17 @@ const CTASection = () => {
           </h2>
 
           <div className="!mt-14">
-            <a
-              href="#contacto"
-              className="inline-flex items-center justify-center bg-[#00b7eb] hover:bg-[#0097DA] text-white font-extrabold text-base sm:text-lg px-8 py-4 rounded-2xl shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              Agenda tu demo
-            </a>
+              <button
+                onClick={onOpenModal}
+                className="inline-flex items-center justify-center bg-[#00b7eb] hover:bg-[#0097DA] text-white font-extrabold text-base sm:text-lg px-8 py-4 rounded-2xl shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
+              >
+                Agenda tu demo
+              </button>
+            </motion.div>
           </div>
         </motion.div>
 

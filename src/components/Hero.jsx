@@ -27,7 +27,10 @@ const DISALLOWED_DOMAINS = [
   'icloud.com', 'live.com', 'msn.com', 'yahoo.es', 'hotmail.es'
 ];
 
-const Hero = () => {
+const Hero = ({ onOpenModal }) => {
+
+    
+
   const companyLogos = ['UKG', 'Johns Hopkins', 'dyson', 'Etsy', 'Affirm', 'Tripadvisor'];
 
   // Estados del Formulario y Pop-up
@@ -55,14 +58,13 @@ const Hero = () => {
     }
 
     const domain = email.split('@')[1]?.toLowerCase();
-
     if (DISALLOWED_DOMAINS.includes(domain)) {
       setErrorMsg('Ingresa un correo empresarial (ej. nombre@tuempresa.com).');
       return;
     }
 
-    // Si pasa las validaciones corporativas, abrimos el Pop-up
-    setIsModalOpen(true);
+    // Abre el modal pasando el email introducido
+    onOpenModal(email);
   };
 
   return (
@@ -122,7 +124,7 @@ const Hero = () => {
                 />
               </div>
 
-              <button 
+              <button
                 type="submit" 
                 className="bg-onecard-sky hover:bg-onecard-sky/90 text-white font-semibold px-8 py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform active:scale-95 whitespace-nowrap"
               >

@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { name: 'FAQ', href: '#faq' },
 ];
 
-const Navbar = () => {
+const Navbar = ({ onOpenModal }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -63,12 +63,12 @@ const Navbar = () => {
 
         {/* BOTÓN CTA ESCRITORIO */}
         <div className="hidden md:flex items-center">
-          <a
-            href="#contacto"
+          <button
+            onClick={onOpenModal}
             className="relative inline-flex items-center justify-center bg-[#00b7eb] hover:bg-[#0097DA] text-white text-xs sm:text-sm font-extrabold px-5 py-2.5 rounded-xl shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
           >
             Hablar con un asesor
-          </a>
+          </button>
         </div>
 
         {/* BOTÓN HAMBURGUESA MÓVIL */}
@@ -107,13 +107,15 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <a
-              href="#contacto"
-              onClick={() => setIsOpen(false)}
-              className="mt-2 bg-[#00b7eb] hover:bg-[#0097DA] text-white text-sm font-extrabold py-3.5 rounded-xl shadow-lg shadow-cyan-500/25 transition-all text-center block"
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                onOpenModal();
+              }}
+              className="mt-2 bg-[#00b7eb] hover:bg-[#0097DA] text-white text-sm font-extrabold py-3.5 rounded-xl shadow-lg shadow-cyan-500/25 transition-all text-center block w-full"
             >
               Hablar con un asesor
-            </a>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
