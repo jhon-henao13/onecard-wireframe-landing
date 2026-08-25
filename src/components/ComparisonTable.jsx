@@ -9,33 +9,35 @@ import onecardLogo from '../assets/onecard-logo-recortado.webp';
 const COMPARISON_DATA = [
   {
     feature: "Atención al Cliente",
-    traditional: "Call centers con bots e interminables menús",
     oneCard: "Soporte Humano Personalizado 24/7/365",
+    traditional: "Call centers con bots e interminables menús",
+    
   },
   {
     feature: "Horarios de Dispersión",
-    traditional: "Rígidos, solo en días/horas hábiles bancarios",
     oneCard: "Dispersión Inmediata 24/7/365 (Sin ventanas)",
+    traditional: "Rígidos, solo en días/horas hábiles bancarios",
+    
   },
   {
     feature: "Aceptación de Red",
-    traditional: "Redes cerradas o restringidas por convenio",
     oneCard: "Red Abierta Nacional Aceptada por VISA",
+    traditional: "Redes cerradas o restringidas por convenio",
   },
   {
     feature: "Costo de Primera Emisión",
-    traditional: "Cobro regular por tarjeta emitida",
     oneCard: "$0 MXN en Primera Emisión (Al migrar con nosotros)",
+    traditional: "Cobro regular por tarjeta emitida",
   },
   {
     feature: "Cargos Ocultos",
-    traditional: "Comisiones sorpresas en facturación",
     oneCard: "Transparencia Total Sin Costos Ocultos",
+    traditional: "Comisiones sorpresas en facturación",
   },
   {
     feature: "Cortesía en Caja",
-    traditional: "Rechazo inmediato si falta $1 peso",
     oneCard: "One Card cubre hasta $2 MXN de diferencia",
+    traditional: "Rechazo inmediato si falta $1 peso",
   },
 ];
 
@@ -82,14 +84,6 @@ const ComparisonTable = ({ onOpenModal }) => {
                     Característica / Beneficio
                   </th>
 
-                  {/* Columna 2: Competencia */}
-                  <th className="w-[35%] p-5 sm:p-6 text-sm sm:text-base font-bold text-slate-600 bg-slate-50/80">
-                    Emisores Tradicionales
-                    <span className="block text-xs font-normal text-slate-400 mt-0.5">
-                      (Edenred, Sí Vale, Pluxee)
-                    </span>
-                  </th>
-
                   {/* Columna 3: ONE CARD (Destacada) */}
                   <th className="w-[35%] relative p-0 sm:p-0 bg-gradient-to-b from-slate-900 to-onecard-dark text-white rounded-t-2xl">
                     {/* Badge de Ganador */}
@@ -105,6 +99,16 @@ const ComparisonTable = ({ onOpenModal }) => {
                       />
                     </div>
                   </th>
+
+                  {/* Columna 2: Competencia */}
+                  <th className="w-[35%] p-5 sm:p-6 text-sm sm:text-base font-bold text-slate-600 bg-slate-50/80">
+                    Emisores Tradicionales
+                    <span className="block text-xs font-normal text-slate-400 mt-0.5">
+                      (Edenred, Sí Vale, Pluxee)
+                    </span>
+                  </th>
+
+                  
                 </tr>
               </thead>
 
@@ -119,6 +123,16 @@ const ComparisonTable = ({ onOpenModal }) => {
                       {row.feature}
                     </td>
 
+                    {/* One Card (Destacado + Check) */}
+                    <td className="p-4 sm:p-5 text-xs sm:text-sm font-medium text-slate-900 bg-sky-50/60 border-x-2 border-onecard-sky/30">
+                      <div className="flex items-start gap-2.5">
+                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold mt-0.5 shadow-sm">
+                          ✓
+                        </span>
+                        <span className="font-semibold text-slate-900">{row.oneCard}</span>
+                      </div>
+                    </td>
+
                     {/* Tradicionales (Con X) */}
                     <td className="p-4 sm:p-5 text-xs sm:text-sm text-slate-500 bg-white group-hover:bg-slate-50/60 transition-colors">
                       <div className="flex items-start gap-2.5">
@@ -129,15 +143,7 @@ const ComparisonTable = ({ onOpenModal }) => {
                       </div>
                     </td>
 
-                    {/* One Card (Destacado + Check) */}
-                    <td className="p-4 sm:p-5 text-xs sm:text-sm font-medium text-slate-900 bg-sky-50/60 border-x-2 border-onecard-sky/30">
-                      <div className="flex items-start gap-2.5">
-                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold mt-0.5 shadow-sm">
-                          ✓
-                        </span>
-                        <span className="font-semibold text-slate-900">{row.oneCard}</span>
-                      </div>
-                    </td>
+                    
                   </tr>
                 ))}
               </tbody>
@@ -145,7 +151,7 @@ const ComparisonTable = ({ onOpenModal }) => {
               {/* Footer con el Botón Integrado a la Columna One Card */}
               <tfoot>
                 <tr>
-                  <td colSpan={2} className="bg-slate-50 border-t border-slate-200"></td>
+                  <td colSpan={1} className="bg-slate-50 border-t border-slate-200"></td>
                   <td className="p-0 bg-onecard-sky border-x-2 border-b-2 border-onecard-sky rounded-b-2xl overflow-hidden">
                     <motion.button 
                       whileHover={{ scale: 1.02, backgroundColor: "#00b7eb" }}
