@@ -108,7 +108,7 @@ const AppShowcase = () => {
             Control financiero, <br className="hidden sm:inline"/>
             literalmente en la palma de tu mano.
           </h2>
-          <p className="text-slate-800 text-base sm:text-lg font-semibold">
+          <p className="text-slate-800 text-base sm:text-lg font-medium max-w-3xl mx-auto">
             Haz todo desde la app móvil con la misma potencia que desde la versión web. Sin complicaciones técnicas.
           </p>
         </motion.div>

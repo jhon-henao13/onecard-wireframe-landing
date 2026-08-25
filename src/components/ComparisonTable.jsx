@@ -46,7 +46,7 @@ const ComparisonTable = ({ onOpenModal }) => {
     <section className="py-20 lg:py-28 px-4 sm:px-6 md:px-12 bg-hero-gradient text-white relative overflow-hidden">
       
       {/* Luces/Glows decorativos de fondo */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-onecard-sky/20 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-onecard-sky/20 blur-[30px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10 space-y-12">
         

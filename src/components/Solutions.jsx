@@ -40,7 +40,7 @@ const Solutions = ({ onOpenModal }) => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#005C94] tracking-tight">
             La solución que tu organización necesita
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-medium !mt-8 max-w-4xl text-center mx-auto">
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-medium !mt-7 max-w-4xl text-center mx-auto">
             Ya sea que busques optimizar la carga fiscal de tu nómina o tomar el control absoluto del consumo de gasolina de tu flotilla, tenemos el monedero perfecto.
           </p>
         </motion.div>
