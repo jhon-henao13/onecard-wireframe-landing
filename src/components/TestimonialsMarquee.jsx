@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 // Importación de las certificaciones y logos requeridos
 import bestPlaceLogo from '../assets/best-place-tocode.png';
-import satLogo from '../assets/sat-blue.png';
+import satLogo from '../assets/hero-right/sat-icon.webp';
 import cnbvLogo from '../assets/cnbv-icon-gray-png.png';
 
 // Casos de éxito para Columna 1 (Scroll Hacia Arriba)

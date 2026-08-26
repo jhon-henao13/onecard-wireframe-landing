@@ -94,7 +94,7 @@ const AppShowcase = () => {
       <div className="absolute top-1/2 left-10 w-72 h-72 bg-sky-200/40 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto relative z-10 space-y-16">
+      <div className="max-w-5xl mx-auto relative z-10 space-y-16">
         
         {/* Encabezado Principal */}
         <motion.div 
@@ -114,7 +114,7 @@ const AppShowcase = () => {
         </motion.div>
 
         {/* Grid de los 2 perfiles: Administradores y Colaboradores */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           
           {/* ==== SECCIÓN IZQUIERDA: ADMINISTRADORES ==== */}
           <div className="flex flex-col items-center space-y-8 bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-slate-100">
@@ -126,7 +126,7 @@ const AppShowcase = () => {
             </div>
 
             {/* Mockup iPhone vectorial */}
-            <div className="relative w-[280px] sm:w-[300px] h-[560px] sm:h-[580px] bg-slate-900 rounded-[48px] p-3 shadow-2xl border-4 border-slate-700/60 ring-1 ring-slate-900/10">
+            <div className="relative w-[270px] sm:w-[290px] h-[550px] sm:h-[570px] bg-slate-900 rounded-[48px] p-3 shadow-2xl border-4 border-slate-700/60 ring-1 ring-slate-900/10">
               
               {/* Dynamic Island */}
               <div className="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-30 flex items-center justify-end px-2">
@@ -150,7 +150,7 @@ const AppShowcase = () => {
                     className="w-full h-full flex flex-col justify-between p-4 relative"
                   >
                     {/* ÁREA RESERVADA PARA IMAGEN / GIF */}
-                    <div className="w-full h-[320px] bg-slate-900 rounded-2xl border border-slate-800 flex flex-col items-center justify-center p-4 text-center overflow-hidden relative group">
+                    <div className="w-full h-[310px] bg-slate-900 rounded-2xl border border-slate-800 flex flex-col items-center justify-center p-4 text-center overflow-hidden relative group">
                       {ADMIN_FEATURES[adminIndex].mediaUrl ? (
                         <img 
                           src={ADMIN_FEATURES[adminIndex].mediaUrl} 
@@ -222,7 +222,7 @@ const AppShowcase = () => {
             </div>
 
             {/* Mockup iPhone vectorial */}
-            <div className="relative w-[280px] sm:w-[300px] h-[560px] sm:h-[580px] bg-slate-900 rounded-[48px] p-3 shadow-2xl border-4 border-slate-700/60 ring-1 ring-slate-900/10">
+            <div className="relative w-[270px] sm:w-[290px] h-[550px] sm:h-[570px] bg-slate-900 rounded-[48px] p-3 shadow-2xl border-4 border-slate-700/60 ring-1 ring-slate-900/10">
               
               {/* Dynamic Island */}
               <div className="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-30 flex items-center justify-end px-2">
