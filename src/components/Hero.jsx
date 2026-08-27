@@ -8,6 +8,18 @@ import cardGreen from '../assets/hero-right/card-green.webp';
 import cnbvIcon from '../assets/hero-right/cnbv-icon.webp';
 import satIcon from '../assets/hero-right/sat-icon.webp';
 
+import logoFord from '../assets/brands/LogoFord.png';
+import logoKia from '../assets/brands/LogoKIA.webp';
+import logoDiken from '../assets/brands/diken-logo.png';
+import logoGrupoSenda from '../assets/brands/gruposenda.png';
+import logoHyundai from '../assets/brands/hyundai-logo.jpg';
+import logoLg from '../assets/brands/logo-lg.webp';
+import logoSally from '../assets/brands/sally-beauty-logo.png';
+import logoSharp from '../assets/brands/sharp-logo.png';
+import logoSuperSalads from '../assets/brands/super-salads-logo.png';
+import logoTeleperformance from '../assets/brands/teleperformance-logo.png';
+import logoVivaAerobus from '../assets/brands/viva-aerobus-Logo.png';
+
 const cardVariants = {
   hidden: { opacity: 0, y: 50, scale: 0.9 },
   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
@@ -31,7 +43,19 @@ const Hero = ({ onOpenModal }) => {
 
     
 
-  const companyLogos = ['UKG', 'Johns Hopkins', 'dyson', 'Etsy', 'Affirm', 'Tripadvisor'];
+const BRAND_LOGOS = [
+  { name: 'Ford', logo: logoFord },
+  { name: 'KIA', logo: logoKia },
+  { name: 'Diken', logo: logoDiken },
+  { name: 'Grupo Senda', logo: logoGrupoSenda },
+  { name: 'Hyundai', logo: logoHyundai },
+  { name: 'LG', logo: logoLg },
+  { name: 'Sally Beauty', logo: logoSally },
+  { name: 'Sharp', logo: logoSharp },
+  { name: 'Super Salads', logo: logoSuperSalads },
+  { name: 'Teleperformance', logo: logoTeleperformance },
+  { name: 'Viva Aerobus', logo: logoVivaAerobus },
+];
 
   // Estados del Formulario y Pop-up
   const [email, setEmail] = useState('');
@@ -257,20 +281,48 @@ const Hero = ({ onOpenModal }) => {
       </div>
 
       {/* Logos Section */}
+      {/* Logos Section - Carrusel Infinito Interactivo */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
-        className="absolute bottom-6 left-0 w-full px-6 md:px-12"
+        className="absolute bottom-4 sm:bottom-6 left-0 w-full px-4 sm:px-6 md:px-12 pointer-events-auto"
       >
-        <div className="max-w-7xl mx-auto border-t border-white/10 pt-4 flex flex-col items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto border-t border-white/10 pt-4 flex flex-col items-center justify-between gap-4">
           <p className="text-xs md:text-sm text-white/60 font-medium tracking-wide uppercase">
             + de 2,500 empresas confían en nosotros
           </p>
-          <div className="flex flex-wrap justify-between w-full items-center gap-6 md:gap-10 opacity-90 hover:opacity-100 transition-opacity">
-            {companyLogos.map((logo) => (
-              <span key={logo} className="text-lg md:text-xl font-bold text-white tracking-tight hover:text-white transition-colors">{logo}</span>
-            ))}
+
+          {/* Contenedor del Carrusel con Difuminado Gradual en los Bordes */}
+          <div className="relative w-full overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            <motion.div
+              className="flex items-center gap-10 sm:gap-14 md:gap-16 w-max"
+              animate={{ x: ['0%', '-50%'] }}
+              transition={{
+                ease: 'linear',
+                duration: 28,
+                repeat: Infinity,
+              }}
+              whileHover={{ animationPlayState: 'paused' }}
+            >
+              {/* Duplicamos el arreglo para lograr un bucle infinito fluído y sin saltos */}
+              {[...BRAND_LOGOS, ...BRAND_LOGOS].map((brand, index) => (
+                <div
+                  key={`${brand.name}-${index}`}
+                  className="flex-shrink-0 flex items-center justify-center h-16 w-32 sm:w-36 group cursor-pointer"
+                >
+                  <img 
+                    src={brand.logo} 
+                    alt={`Logo ${brand.name}`} 
+                    className={`max-w-full object-contain filter brightness-200 contrast-125 opacity-80 group-hover:brightness-100 group-hover:contrast-100 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 ${
+                      ['KIA', 'Hyundai', 'Sally Beauty', 'Sharp', 'Super Salads'].includes(brand.name) 
+                        ? 'max-h-16 sm:max-h-20' 
+                        : 'max-h-8 sm:max-h-10'
+                    }`}
+                  />
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </motion.div>
