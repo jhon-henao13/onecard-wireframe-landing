@@ -33,8 +33,8 @@ const STEPS = [
     number: '03',
     time: 'Inmediato',
     title: 'Dispersa el saldo',
-    description: 'Carga saldo desde la plataforma web 24/7. Programa cargas recurrentes, define límites por tarjeta y dispersa por nómina.',
-    tags: ['Plataforma 24/7', 'Cargas recurrentes', 'Límites por tarjeta'],
+    description: 'Carga saldo desde la plataforma web o la app móvil de forma inmediata y 24/7. Programa cargas recurrentes, define límites por tarjeta y dispersa por nómina.',
+    tags: ['Plataforma web y App móvil', 'Cargas recurrentes', 'Límites por tarjeta'],
     // Icono SVG de avión de papel / dispersión
     icon: (
       <svg className="w-6 h-6 text-[#0097DA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">

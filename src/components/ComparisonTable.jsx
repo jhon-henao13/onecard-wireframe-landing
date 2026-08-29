@@ -26,7 +26,7 @@ const COMPARISON_DATA = [
   },
   {
     feature: "Costo de Primera Emisión",
-    oneCard: "$0 MXN en Primera Emisión (Al migrar con nosotros)",
+    oneCard: "$0 MXN en Primera Emisión*",
     traditional: "Cobro regular por tarjeta emitida",
   },
   {
@@ -37,7 +37,7 @@ const COMPARISON_DATA = [
   {
     feature: "Cortesía en Caja",
     oneCard: "One Card cubre hasta $2 MXN de diferencia",
-    traditional: "Rechazo inmediato si falta $1 peso",
+    traditional: "Cobran comisiones por rechazos por fondos insuficientes",
   },
 ];
 
@@ -129,7 +129,14 @@ const ComparisonTable = ({ onOpenModal }) => {
                         <span className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold mt-0.5 shadow-sm">
                           ✓
                         </span>
-                        <span className="font-semibold text-slate-900">{row.oneCard}</span>
+                        <div className="flex flex-col">
+                          <span className="font-semibold text-slate-900">{row.oneCard}</span>
+                          {idx === 3 && (
+                            <span className="text-[11px] text-slate-500 font-normal mt-1 leading-tight">
+                              * Válido únicamente para empresas que vienen de la competencia.
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </td>
 

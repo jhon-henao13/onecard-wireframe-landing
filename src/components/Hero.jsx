@@ -8,7 +8,7 @@ import cardGreen from '../assets/hero-right/card-green.webp';
 import cnbvIcon from '../assets/hero-right/cnbv-icon.webp';
 import satIcon from '../assets/hero-right/sat-icon.webp';
 
-import logoFord from '../assets/brands/LogoFord.png';
+// import logoFord from '../assets/brands/LogoFord.png';
 import logoKia from '../assets/brands/LogoKIA.webp';
 import logoDiken from '../assets/brands/diken-logo.png';
 import logoGrupoSenda from '../assets/brands/gruposenda.png';
@@ -44,7 +44,7 @@ const Hero = ({ onOpenModal }) => {
     
 
 const BRAND_LOGOS = [
-  { name: 'Ford', logo: logoFord },
+  // { name: 'Ford', logo: logoFord },
   { name: 'KIA', logo: logoKia },
   { name: 'Diken', logo: logoDiken },
   { name: 'Grupo Senda', logo: logoGrupoSenda },
@@ -240,7 +240,7 @@ const BRAND_LOGOS = [
             />
 
             {/* 4. Icono CNBV */}
-            <motion.img 
+            {/* <motion.img 
               src={cnbvIcon} 
               alt="Sello CNBV" 
               initial={{ opacity: 0, scale: 0.5 }}
@@ -255,7 +255,7 @@ const BRAND_LOGOS = [
                 y: { duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.3 }
               }}
               className="absolute top-[3%] right-[33%] w-[13%] max-w-[55px] h-auto object-contain drop-shadow-lg z-20 pointer-events-none"
-            />
+            /> */}
 
             {/* 5. Icono SAT */}
             <motion.img 
@@ -272,7 +272,7 @@ const BRAND_LOGOS = [
                 scale: { duration: 0.6, delay: 1 },
                 y: { duration: 4.8, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.7 }
               }}
-              className="absolute top-[16%] right-[10%] w-[13%] max-w-[55px] h-auto object-contain drop-shadow-lg z-20 pointer-events-none"
+              className="absolute top-[16%] right-[13%] w-[13%] max-w-[55px] h-auto object-contain drop-shadow-lg z-20 pointer-events-none"
             />
 
           </div>

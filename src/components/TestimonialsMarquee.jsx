@@ -146,11 +146,11 @@ const TestimonialsMarquee = () => {
                 alt="SAT Autorizado" 
                 className="h-20 w-auto object-contain brightness-110 hover:scale-105 transition-transform" 
               />
-              <img 
+              {/* <img 
                 src={cnbvLogo} 
                 alt="Regulado CNBV" 
                 className="h-20 w-auto object-contain brightness-110 hover:scale-105 transition-transform" 
-              />
+              /> */}
             </div>
           </div>
         </motion.div>
