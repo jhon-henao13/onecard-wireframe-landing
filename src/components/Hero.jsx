@@ -280,8 +280,7 @@ const BRAND_LOGOS = [
 
       </div>
 
-      {/* Logos Section */}
-      {/* Logos Section - Carrusel Infinito Interactivo */}
+      {/* Logos Section - Carrusel Infinito Interactivo y Deslizable */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -293,15 +292,19 @@ const BRAND_LOGOS = [
             + de 2,500 empresas confían en nosotros
           </p>
 
-          {/* Contenedor del Carrusel con Difuminado Gradual en los Bordes */}
-          <div className="relative w-full overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          {/* Contenedor del Carrusel Arrastrable con Difuminado */}
+          <div className="relative w-full overflow-hidden py-2 cursor-grab active:cursor-grabbing [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             <motion.div
               className="flex items-center gap-10 sm:gap-14 md:gap-16 w-max"
+              drag="x"
+              dragConstraints={{ left: -1000, right: 0 }}
               animate={{ x: ['0%', '-50%'] }}
               transition={{
-                ease: 'linear',
-                duration: 28,
-                repeat: Infinity,
+                x: {
+                  ease: 'linear',
+                  duration: 28,
+                  repeat: Infinity,
+                }
               }}
               whileHover={{ animationPlayState: 'paused' }}
             >
@@ -309,13 +312,15 @@ const BRAND_LOGOS = [
               {[...BRAND_LOGOS, ...BRAND_LOGOS].map((brand, index) => (
                 <div
                   key={`${brand.name}-${index}`}
-                  className="flex-shrink-0 flex items-center justify-center h-16 w-32 sm:w-36 group cursor-pointer"
+                  className="flex-shrink-0 flex items-center justify-center h-16 w-32 sm:w-36 group pointer-events-none"
                 >
                   <img 
                     src={brand.logo} 
                     alt={`Logo ${brand.name}`} 
-                    className={`max-w-full object-contain filter brightness-200 contrast-125 opacity-80 group-hover:brightness-100 group-hover:contrast-100 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 ${
-                      ['KIA', 'Hyundai', 'Sally Beauty', 'Sharp', 'Super Salads'].includes(brand.name) 
+                    className={`max-w-full object-contain brightness-0 invert opacity-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 pointer-events-auto ${
+                      ['Ford', 'Grupo Senda', 'KIA', 'Teleperformance'].includes(brand.name)
+                        ? 'max-h-14 sm:max-h-20' 
+                        : ['Hyundai', 'Sally Beauty', 'Sharp', 'Super Salads'].includes(brand.name) 
                         ? 'max-h-16 sm:max-h-20' 
                         : 'max-h-8 sm:max-h-10'
                     }`}
