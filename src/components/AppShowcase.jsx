@@ -1,6 +1,8 @@
 // src/components/AppShowcase.jsx
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import gifAdmin from '../assets/gif-videodemo-admin.gif';
+import gifUsuarios from '../assets/gif-videodemo-usuarios.gif';
 
 // Datos para la App de Administradores
 const ADMIN_FEATURES = [
@@ -9,8 +11,7 @@ const ADMIN_FEATURES = [
     title: 'Dispersión 24/7',
     description: 'Asigna y gestiona fondos a cualquier tarjeta en tiempo real, sin importar el día ni la hora.',
     icon: '⚡',
-    // Reemplaza esta propiedad con la ruta de tu GIF o imagen cuando lo tengas
-    mediaUrl: null, 
+    mediaUrl: gifAdmin,
     color: '#0097DA'
   },
   {
@@ -18,7 +19,7 @@ const ADMIN_FEATURES = [
     title: 'Control Total',
     description: 'Establece límites de gasto por vehículo, tarjeta, tipo de combustible o días de la semana.',
     icon: '🛡️',
-    mediaUrl: null,
+    mediaUrl: gifAdmin,
     color: '#005C94'
   },
   {
@@ -26,15 +27,15 @@ const ADMIN_FEATURES = [
     title: 'Conciliación Automática',
     description: 'Olvídate de facturas perdidas. Descarga reportes fiscales consolidados en un par de clics.',
     icon: '📊',
-    mediaUrl: null,
+    mediaUrl: gifAdmin,
     color: '#00b7eb'
   },
   {
     id: 'geolocalizacion',
     title: 'Geolocalización de Cargas',
-    description: 'Visualiza en el mapa dónde y cuándo se realizan los consumos de gasolina de tu flotilla.',
+    description: 'Visualiza en el mapa dónde y cuándo se realizó cada transacción.',
     icon: '📍',
-    mediaUrl: null,
+    mediaUrl: gifAdmin,
     color: '#00253E'
   }
 ];
@@ -42,34 +43,45 @@ const ADMIN_FEATURES = [
 // Datos para la App de Colaboradores
 const DRIVER_FEATURES = [
   {
-    id: 'saldo',
-    title: 'Saldo en Tiempo Real',
-    description: 'Consulta los fondos disponibles y movimientos recientes al instante desde tu teléfono.',
-    icon: '💳',
-    mediaUrl: null,
-    color: '#0097DA'
+    id: 'consultas',
+    title: 'Consulta de Saldo y Movimientos',
+    description: 'Revisa tu saldo disponible e historial de transacciones al instante desde la app.',
+    icon: '📲',
+    mediaUrl: gifUsuarios,
+    color: '#10B981'
   },
   {
-    id: 'seguridad',
-    title: 'Seguridad en la App',
-    description: 'Bloqueo y desbloqueo de tarjeta de inmediato ante cualquier eventualidad o extravío.',
+    id: 'bloqueo',
+    title: 'Bloqueo y Desbloqueo Preventivo',
+    description: '¿Perdiste tu tarjeta? Apágala temporalmente con un toque desde la aplicación.',
     icon: '🔒',
-    mediaUrl: null,
-    color: '#005C94'
+    mediaUrl: gifUsuarios,
+    color: '#059669'
   },
   {
-    id: 'virtual',
-    title: 'Tarjeta Virtual',
-    description: 'Genera tarjetas digitales seguras para compras en línea o pagos rápidos.',
-    icon: '📱',
-    mediaUrl: null,
-    color: '#00b7eb'
+    id: 'mapa',
+    title: 'Red de Estaciones Cercanas',
+    description: 'Encuentra gasolineras y comercios afiliados cerca de tu ubicación actual.',
+    icon: '🗺️',
+    mediaUrl: gifUsuarios,
+    color: '#047857'
+  },
+  {
+    id: 'soporte',
+    title: 'Atención Directa',
+    description: 'Soporte y asistencia en carretera directo desde el menú de la aplicación.',
+    icon: '💬',
+    mediaUrl: gifUsuarios,
+    color: '#065F46'
   }
 ];
 
 const AppShowcase = () => {
   const [adminIndex, setAdminIndex] = useState(0);
   const [driverIndex, setDriverIndex] = useState(0);
+
+  const currentAdmin = ADMIN_FEATURES[adminIndex];
+  const currentDriver = DRIVER_FEATURES[driverIndex];
 
   // Intervalos de rotación automática
   useEffect(() => {
@@ -126,60 +138,38 @@ const AppShowcase = () => {
             </div>
 
             {/* Mockup iPhone vectorial */}
-            <div className="relative w-[270px] sm:w-[290px] h-[550px] sm:h-[570px] bg-slate-900 rounded-[48px] p-3 shadow-2xl border-4 border-slate-700/60 ring-1 ring-slate-900/10">
-              
-              {/* Dynamic Island */}
-              <div className="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-30 flex items-center justify-end px-2">
-                <div className="w-2.5 h-2.5 bg-slate-800 rounded-full" />
+            {/* PANTALLA MOCKUP TELÉFONO - ADMINISTRADOR */}
+            <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[320px] aspect-[9/19] bg-slate-900 rounded-[2.8rem] p-3 shadow-2xl border-4 border-slate-700/80 flex flex-col items-center justify-center overflow-hidden">
+
+              {/* Notch Superior / Dynamic Island */}
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 w-24 h-4 bg-slate-950 rounded-full z-30 flex items-center justify-end px-2">
+                <div className="w-2 h-2 rounded-full bg-slate-800" />
               </div>
 
-              {/* Botones laterales simulados */}
-              <div className="absolute -left-1.5 top-24 w-1 h-10 bg-slate-600 rounded-l-md" />
-              <div className="absolute -left-1.5 top-38 w-1 h-12 bg-slate-600 rounded-l-md" />
-              <div className="absolute -right-1.5 top-28 w-1 h-16 bg-slate-600 rounded-r-md" />
-
-              {/* Pantalla interior móvil */}
-              <div className="w-full h-full bg-slate-950 rounded-[38px] overflow-hidden relative flex flex-col pt-10">
+              {/* Pantalla Interna del GIF sin recortes */}
+              <div className="relative w-full h-full bg-black rounded-[2.2rem] overflow-hidden flex items-center justify-center pt-2">
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={adminIndex}
+                    key={currentAdmin.id}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
-                    className="w-full h-full flex flex-col justify-between p-4 relative"
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full flex items-center justify-center p-1"
                   >
-                    {/* ÁREA RESERVADA PARA IMAGEN / GIF */}
-                    <div className="w-full h-[310px] bg-slate-900 rounded-2xl border border-slate-800 flex flex-col items-center justify-center p-4 text-center overflow-hidden relative group">
-                      {ADMIN_FEATURES[adminIndex].mediaUrl ? (
-                        <img 
-                          src={ADMIN_FEATURES[adminIndex].mediaUrl} 
-                          alt={ADMIN_FEATURES[adminIndex].title} 
-                          className="w-full h-full object-cover rounded-xl"
-                        />
-                      ) : (
-                        /* Placeholder temporal estilizado mientras subes las imágenes */
-                        <div className="space-y-3">
-                          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#0097DA] to-[#00b7eb] flex items-center justify-center text-3xl mx-auto shadow-lg shadow-sky-500/30">
-                            {ADMIN_FEATURES[adminIndex].icon}
-                          </div>
-                          <span className="text-xs text-slate-400 block font-mono">
-                            [ Previsualización GIF/UI ]
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Contenido / Texto dinámico dentro de la App */}
-                    <div className="bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 space-y-1">
-                      <h4 className="text-sm font-bold text-white flex items-center gap-2">
-                        <span>{ADMIN_FEATURES[adminIndex].icon}</span>
-                        <span>{ADMIN_FEATURES[adminIndex].title}</span>
-                      </h4>
-                      <p className="text-xs text-slate-300 leading-relaxed">
-                        {ADMIN_FEATURES[adminIndex].description}
-                      </p>
-                    </div>
+                    {currentAdmin.mediaUrl ? (
+                      <img 
+                        src={currentAdmin.mediaUrl} 
+                        alt={currentAdmin.title}
+                        className="w-full h-full object-contain rounded-[1.8rem]"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col items-center justify-center text-center p-6 text-white">
+                        <span className="text-5xl mb-4">{currentAdmin.icon}</span>
+                        <h4 className="font-bold text-lg">{currentAdmin.title}</h4>
+                        <p className="text-xs text-slate-400 mt-2">{currentAdmin.description}</p>
+                      </div>
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -222,60 +212,38 @@ const AppShowcase = () => {
             </div>
 
             {/* Mockup iPhone vectorial */}
-            <div className="relative w-[270px] sm:w-[290px] h-[550px] sm:h-[570px] bg-slate-900 rounded-[48px] p-3 shadow-2xl border-4 border-slate-700/60 ring-1 ring-slate-900/10">
-              
-              {/* Dynamic Island */}
-              <div className="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-30 flex items-center justify-end px-2">
-                <div className="w-2.5 h-2.5 bg-slate-800 rounded-full" />
+            {/* PANTALLA MOCKUP TELÉFONO - COLABORADOR */}
+            <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[320px] aspect-[9/19] bg-slate-900 rounded-[2.8rem] p-3 shadow-2xl border-4 border-slate-700/80 flex flex-col items-center justify-center overflow-hidden">
+
+              {/* Notch Superior / Dynamic Island */}
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 w-24 h-4 bg-slate-950 rounded-full z-30 flex items-center justify-end px-2">
+                <div className="w-2 h-2 rounded-full bg-slate-800" />
               </div>
 
-              {/* Botones laterales simulados */}
-              <div className="absolute -left-1.5 top-24 w-1 h-10 bg-slate-600 rounded-l-md" />
-              <div className="absolute -left-1.5 top-38 w-1 h-12 bg-slate-600 rounded-l-md" />
-              <div className="absolute -right-1.5 top-28 w-1 h-16 bg-slate-600 rounded-r-md" />
-
-              {/* Pantalla interior móvil */}
-              <div className="w-full h-full bg-slate-950 rounded-[38px] overflow-hidden relative flex flex-col pt-10">
+              {/* Pantalla Interna del GIF sin recortes */}
+              <div className="relative w-full h-full bg-black rounded-[2.2rem] overflow-hidden flex items-center justify-center pt-2">
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={driverIndex}
+                    key={currentDriver.id}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
-                    className="w-full h-full flex flex-col justify-between p-4 relative"
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full flex items-center justify-center p-1"
                   >
-                    {/* ÁREA RESERVADA PARA IMAGEN / GIF */}
-                    <div className="w-full h-[320px] bg-slate-900 rounded-2xl border border-slate-800 flex flex-col items-center justify-center p-4 text-center overflow-hidden relative group">
-                      {DRIVER_FEATURES[driverIndex].mediaUrl ? (
-                        <img 
-                          src={DRIVER_FEATURES[driverIndex].mediaUrl} 
-                          alt={DRIVER_FEATURES[driverIndex].title} 
-                          className="w-full h-full object-cover rounded-xl"
-                        />
-                      ) : (
-                        /* Placeholder temporal */
-                        <div className="space-y-3">
-                          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-[#00b7eb] flex items-center justify-center text-3xl mx-auto shadow-lg shadow-emerald-500/20">
-                            {DRIVER_FEATURES[driverIndex].icon}
-                          </div>
-                          <span className="text-xs text-slate-400 block font-mono">
-                            [ Previsualización GIF/UI ]
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Contenido / Texto dinámico dentro de la App */}
-                    <div className="bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 space-y-1">
-                      <h4 className="text-sm font-bold text-white flex items-center gap-2">
-                        <span>{DRIVER_FEATURES[driverIndex].icon}</span>
-                        <span>{DRIVER_FEATURES[driverIndex].title}</span>
-                      </h4>
-                      <p className="text-xs text-slate-300 leading-relaxed">
-                        {DRIVER_FEATURES[driverIndex].description}
-                      </p>
-                    </div>
+                    {currentDriver.mediaUrl ? (
+                      <img 
+                        src={currentDriver.mediaUrl} 
+                        alt={currentDriver.title}
+                        className="w-full h-full object-contain rounded-[1.8rem]"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col items-center justify-center text-center p-6 text-white">
+                        <span className="text-5xl mb-4">{currentDriver.icon}</span>
+                        <h4 className="font-bold text-lg">{currentDriver.title}</h4>
+                        <p className="text-xs text-slate-400 mt-2">{currentDriver.description}</p>
+                      </div>
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
