@@ -317,7 +317,7 @@ const BRAND_LOGOS = [
                   <img 
                     src={brand.logo} 
                     alt={`Logo ${brand.name}`} 
-                    className={`max-w-full object-contain brightness-0 invert opacity-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 pointer-events-auto ${
+                    className={`max-w-full object-contain brightness-0 invert opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 pointer-events-auto ${
                       ['Ford', 'Grupo Senda', 'KIA', 'Teleperformance'].includes(brand.name)
                         ? 'max-h-14 sm:max-h-20' 
                         : ['Hyundai', 'Sally Beauty', 'Sharp', 'Super Salads'].includes(brand.name) 

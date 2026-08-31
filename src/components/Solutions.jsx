@@ -199,7 +199,7 @@ const Solutions = ({ onOpenModal }) => {
             className="lg:col-span-5 flex flex-col items-center justify-center space-y-8 order-1 lg:order-2"
           >
             {/* Contenedor de Tarjeta Frente + Reverso */}
-            <div className="flex items-end justify-start gap-1 sm:gap-2 w-full">
+            <div className="flex items-end justify-center gap-1 sm:gap-2 w-full">
               <motion.div 
                 whileHover={{ y: -8, rotate: -2 }}
                 transition={{ type: "spring", stiffness: 300 }}
@@ -212,7 +212,7 @@ const Solutions = ({ onOpenModal }) => {
                 />
               </motion.div>
 
-              <motion.div 
+              {/* <motion.div 
                 whileHover={{ y: -8, rotate: 2 }}
                 transition={{ type: "spring", stiffness: 300 }}
                 className="w-[60%] max-w-[300px]"
@@ -222,7 +222,7 @@ const Solutions = ({ onOpenModal }) => {
                   alt="Despensa One Card Reverso" 
                   className="w-full h-auto object-contain drop-shadow-xl hover:drop-shadow-2xl transition-all"
                 />
-              </motion.div>
+              </motion.div> */}
             </div>
 
             {/* Botón CTA Despensa */}
