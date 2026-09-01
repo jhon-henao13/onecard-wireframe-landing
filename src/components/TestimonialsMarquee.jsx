@@ -131,28 +131,72 @@ const TestimonialsMarquee = () => {
           </div>
 
           {/* Bloque de Sellos / Certificaciones */}
-          <div className="pt-4 border-t border-slate-800 space-y-4">
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              Respaldado y Autorizado Por:
-            </p>
-            <div className="flex flex-wrap items-center gap-6 bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80 backdrop-blur-sm">
-              <img 
-                src={bestPlaceLogo} 
-                alt="Best Place to Code" 
-                className="h-20 w-auto object-contain brightness-110 hover:scale-105 transition-transform" 
-              />
-              <img 
-                src={satLogo} 
-                alt="SAT Autorizado" 
-                className="h-20 w-auto object-contain brightness-110 hover:scale-105 transition-transform" 
-              />
-              {/* <img 
-                src={cnbvLogo} 
-                alt="Regulado CNBV" 
-                className="h-20 w-auto object-contain brightness-110 hover:scale-105 transition-transform" 
-              /> */}
+          {/* Bloque de Sellos / Certificaciones - Dividido en 2 Secciones UI Premium */}
+          <div className="pt-6 border-t border-slate-800/80 space-y-4">
+            
+            {/* SECCIÓN 1: Respaldado y Autorizado por el SAT */}
+            <div className="group relative bg-slate-900/50 hover:bg-slate-900/80 p-4 rounded-2xl border border-slate-800 hover:border-onecard-sky/40 transition-all duration-300 backdrop-blur-md shadow-lg">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Respaldado y Autorizado por
+                </span>
+                <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+                  Oficial SAT
+                </span>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="bg-white/5 p-2 rounded-xl border border-white/10 group-hover:border-onecard-sky/30 transition-colors">
+                  <img 
+                    src={satLogo} 
+                    alt="SAT Autorizado" 
+                    className="h-10 w-auto object-contain filter brightness-110 group-hover:scale-105 transition-transform duration-300" 
+                  />
+                </div>
+                <div className="text-xs">
+                  <p className="font-semibold text-white group-hover:text-onecard-sky transition-colors">
+                    Emisor Autorizado de Monederos
+                  </p>
+                  <p className="text-slate-400 text-[11px]">
+                    Validez fiscal ante el Servicio de Administración Tributaria.
+                  </p>
+                </div>
+              </div>
             </div>
+
+            {/* SECCIÓN 2: Reconocimientos y Best Place to Code */}
+            <div className="group relative bg-slate-900/50 hover:bg-slate-900/80 p-4 rounded-2xl border border-slate-800 hover:border-onecard-sky/40 transition-all duration-300 backdrop-blur-md shadow-lg">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+                  <span className="text-amber-400">🏆</span>
+                  Reconocimientos
+                </span>
+                <span className="text-[10px] font-semibold text-sky-400 bg-sky-500/10 border border-sky-500/20 px-2 py-0.5 rounded-full">
+                  Tech Excellence
+                </span>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="bg-white/5 p-2 rounded-xl border border-white/10 group-hover:border-onecard-sky/30 transition-colors">
+                  <img 
+                    src={bestPlaceLogo} 
+                    alt="Best Place to Code" 
+                    className="h-10 w-auto object-contain filter brightness-110 group-hover:scale-105 transition-transform duration-300" 
+                  />
+                </div>
+                <div className="text-xs">
+                  <p className="font-semibold text-white group-hover:text-onecard-sky transition-colors">
+                    Best Place to Code®
+                  </p>
+                  <p className="text-slate-400 text-[11px]">
+                    Acreditación a organizaciones con cultura tecnológica de excelencia.
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
+
+          
         </motion.div>
 
         {/* COLUMNA DERECHA: Carrusel Infinito Doble (Up/Down) */}
