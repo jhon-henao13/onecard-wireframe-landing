@@ -105,7 +105,7 @@ const Footer = () => {
               <span className="text-xs font-extrabold text-[#00b7eb] block tracking-wide">
                 SERVICIO AL CLIENTE
               </span>
-              <p className="text-xs text-slate-400">Tel. +52 (81) 8805 4387</p>
+              <p className="text-xs text-slate-400">Tel. +52 (81) 8248 8251</p>
               <a 
                 href="mailto:empresas@onecard.mx" 
                 className="text-xs text-slate-400 hover:text-white transition-colors block"
