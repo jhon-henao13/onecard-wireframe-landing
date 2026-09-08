@@ -69,6 +69,17 @@ const COLUMN_2_ITEMS = [
     text: 'Me parece una aplicación que es excelente y la puedo usar en cualquier comercio.',
     helpfulCount: null,
   },
+
+  {
+    id: 8,
+    author: 'Logistik Operacional.',
+    rating: 5,
+    date: 'Alianzas Estratégicas',
+    text: 'Más de 7 años creciendo junto a One Card respaldan la confianza de Logistik Operacional O. Su gestion transparente y correcta es la clave para entregar soluciones en tiempo y forma',
+    helpfulCount: null,
+    isCorporate: true, // Bandera opcional para diferenciar el estilo si lo deseas
+  },
+
 ];
 
 const TestimonialsMarquee = () => {
