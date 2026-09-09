@@ -1,15 +1,27 @@
 // src/components/ContactModal.jsx
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const DISALLOWED_DOMAINS = [
   'gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 
   'icloud.com', 'live.com', 'msn.com', 'yahoo.es', 'hotmail.es'
 ];
 
+
+const ESTADOS_MEXICO = [
+  'Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas',
+  'Chihuahua', 'Ciudad de México', 'Coahuila', 'Colima', 'Durango', 'Estado de México',
+  'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'Michoacán', 'Morelos', 'Nayarit',
+  'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí',
+  'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
+];
+
+
 const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
   const [step, setStep] = useState(1);
   const [errorMsg, setErrorMsg] = useState('');
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     nombre: '',
@@ -19,6 +31,8 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     empresa: '',
     empleados: '11-50',
     puesto: '',
+    estado: '',
+    productos: [],
     ofrecenVales: 'No'
   });
 
@@ -43,6 +57,18 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errorMsg) setErrorMsg('');
   };
+
+  const handleProductToggle = (product) => {
+    setFormData((prev) => {
+      const exists = prev.productos.includes(product);
+      const updated = exists
+        ? prev.productos.filter((p) => p !== product)
+        : [...prev.productos, product];
+      return { ...prev, productos: updated };
+    });
+    if (errorMsg) setErrorMsg('');
+  };
+
 
   // Validar Step 1
   const handleNextStep = (e) => {
@@ -73,15 +99,25 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     e.preventDefault();
     setErrorMsg('');
 
-    if (!formData.empresa.trim() || !formData.puesto.trim()) {
-      setErrorMsg('Por favor completa la información de tu empresa.');
+    if (!formData.empresa.trim() || !formData.puesto.trim() || !formData.estado) {
+      setErrorMsg('Por favor completa todos los campos obligatorios de tu empresa.');
       return;
     }
 
-    // Aquí podrías enviar formData a tu backend / Webhook (n8n, HubSpot, etc.)
+    if (formData.productos.length === 0) {
+      setErrorMsg('Por favor selecciona al menos un producto de tu interés.');
+      return;
+    }
+
     console.log('Datos del Lead Registrado:', formData);
 
-    setStep(3);
+    onClose();
+    navigate('/thankyou', {
+      state: {
+        name: `${formData.nombre} ${formData.apellido}`.trim(),
+        email: formData.email
+      }
+    });
   };
 
   // Generar URL de Calendly con datos pre-poblados
@@ -222,6 +258,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
                 <p className="text-sm text-slate-300 mt-1">Nos ayuda a preparar una propuesta a la medida.</p>
               </div>
 
+              {/* Fila 1: Empresa y Puesto */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-200 mb-1">Empresa o Razón Social *</label>
@@ -250,21 +287,70 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-200 mb-1">Número de Empleados *</label>
-                <select
-                  name="empleados"
-                  value={formData.empleados}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-[#003456] border border-white/15 focus:border-[#00b7eb] focus:outline-none text-white text-sm transition-all"
-                >
-                  <option value="0-10">0 - 10 empleados</option>
-                  <option value="11-50">11 - 50 empleados</option>
-                  <option value="50-100">50 - 100 empleados</option>
-                  <option value="100+">100+ empleados</option>
-                </select>
+              {/* Fila 2: Estado y Número de Empleados */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-200 mb-1">Estado de la República *</label>
+                  <select
+                    name="estado"
+                    required
+                    value={formData.estado}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-[#003456] border border-white/15 focus:border-[#00b7eb] focus:outline-none text-white text-sm transition-all"
+                  >
+                    <option value="" disabled>Selecciona tu estado</option>
+                    {ESTADOS_MEXICO.map((est) => (
+                      <option key={est} value={est}>
+                        {est}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-200 mb-1">Número de Empleados *</label>
+                  <select
+                    name="empleados"
+                    value={formData.empleados}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-[#003456] border border-white/15 focus:border-[#00b7eb] focus:outline-none text-white text-sm transition-all"
+                  >
+                    <option value="0-10">0 - 10 empleados</option>
+                    <option value="11-50">11 - 50 empleados</option>
+                    <option value="50-100">50 - 100 empleados</option>
+                    <option value="100+">100+ empleados</option>
+                  </select>
+                </div>
               </div>
 
+              {/* Fila 3: Productos de Interés (Opción Múltiple) */}
+              <div>
+                <label className="block text-xs font-semibold text-slate-200 mb-2">
+                  Producto de interés (Puedes elegir varios) *
+                </label>
+                <div className="grid grid-cols-3 gap-2.5">
+                  {['Despensa', 'Combustible', 'Premios'].map((prod) => {
+                    const isSelected = formData.productos.includes(prod);
+                    return (
+                      <button
+                        key={prod}
+                        type="button"
+                        onClick={() => handleProductToggle(prod)}
+                        className={`py-2.5 px-2 rounded-xl border text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-1.5 ${
+                          isSelected
+                            ? 'bg-[#00b7eb] border-[#00b7eb] text-white shadow-md shadow-cyan-500/20'
+                            : 'bg-white/5 border-white/15 text-slate-300 hover:bg-white/10'
+                        }`}
+                      >
+                        <span className="text-xs">{isSelected ? '✓' : '+'}</span>
+                        {prod}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Fila 4: ¿Ya ofrecen vales? */}
               <div>
                 <label className="block text-xs font-semibold text-slate-200 mb-2">¿Ya ofrecen vales actualmente? *</label>
                 <div className="grid grid-cols-2 gap-3">
