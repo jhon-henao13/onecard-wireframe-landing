@@ -112,7 +112,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     console.log('Datos del Lead Registrado:', formData);
 
     onClose();
-    navigate('/thankyou', {
+    navigate('/gracias', {
       state: {
         name: `${formData.nombre} ${formData.apellido}`.trim(),
         email: formData.email
@@ -389,7 +389,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
                   type="submit"
                   className="w-2/3 bg-[#00b7eb] hover:bg-[#0097DA] text-white font-bold py-3.5 rounded-xl shadow-lg shadow-cyan-500/25 transition-all"
                 >
-                  Confirmar y Agendar
+                  Enviar Solicitud
                 </button>
               </div>
             </form>

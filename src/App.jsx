@@ -53,8 +53,8 @@ function App() {
         }
       />
 
-      {/* Ruta /thankyou */}
-      <Route path="/thankyou" element={<ThankYou />} />
+      {/* Ruta /gracias */}
+      <Route path="/gracias" element={<ThankYou />} />
     </Routes>
   );
 }
