@@ -178,7 +178,7 @@ const SavingsCalculator = () => {
           className="max-w-5xl mx-auto space-y-6 pt-4 text-white/90 text-sm sm:text-lg leading-relaxed"
         >
           <p>
-            <strong className="text-white font-bold">Ahorro en Despensa:</strong> Al otorgar $1,000 MXN en vales de despensa vía One Card vs. Dinero en Nómina, tu empresa ahorra hasta un 53% en ISR y exenta las cuotas patronales de IMSS e INFONAVIT sobre ese monto.
+            <strong className="text-white font-bold">Ahorro en Despensa:</strong> Al otorgar $1,000 MXN en vales de despensa vía One Card vs. Dinero en Nómina, tu empresa ahorra hasta un 53% en ISR y exenta las cuotas patronales de IMSS e INFONAVIT sobre ese monto. Además, de cara al colaborador, el monto depositado vía Despensa es 100% libre de impuestos, convirtiéndose en una prestación de alta fidelización de empleados.
           </p>
 
           <p>

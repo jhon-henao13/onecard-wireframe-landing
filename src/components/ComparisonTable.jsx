@@ -6,18 +6,22 @@ import { motion } from 'framer-motion';
 import onecardLogo from '../assets/onecard-logo-recortado.webp';
 
 // Datos de la tabla comparativa
+// Datos de la tabla comparativa
 const COMPARISON_DATA = [
   {
     feature: "Atención al Cliente",
     oneCard: "Soporte Humano Personalizado 24/7/365",
     traditional: "Call centers con bots e interminables menús",
-    
   },
   {
-    feature: "Horarios de Dispersión",
-    oneCard: "Dispersión Inmediata 24/7/365 (Sin ventanas)",
+    feature: "Horarios de Dispersión y Depósitos",
+    oneCard: "Recepción de depósitos y dispersión inmediata 24/7/365",
     traditional: "Rígidos, solo en días/horas hábiles bancarios",
-    
+  },
+  {
+    feature: "Entrega Ágil de Tarjetas",
+    oneCard: "24 hrs en área metropolitana de Mty / Máx. 3 días a nivel nacional",
+    traditional: "Tiempos prolongados de entrega (semanas)",
   },
   {
     feature: "Aceptación de Red",
@@ -104,7 +108,7 @@ const ComparisonTable = ({ onOpenModal }) => {
                   <th className="w-[35%] p-5 sm:p-6 text-sm sm:text-base font-bold text-slate-600 bg-slate-50/80">
                     Emisores Tradicionales
                     <span className="block text-xs font-normal text-slate-400 mt-0.5">
-                      (Edenred, Sí Vale, Pluxee)
+                      (Otros proveedores)
                     </span>
                   </th>
 
@@ -131,11 +135,13 @@ const ComparisonTable = ({ onOpenModal }) => {
                         </span>
                         <div className="flex flex-col">
                           <span className="font-semibold text-slate-900">{row.oneCard}</span>
-                          {idx === 3 && (
+
+                          {row.feature === "Costo de Primera Emisión" && (
                             <span className="text-[11px] text-slate-500 font-normal mt-1 leading-tight">
                               * Válido únicamente para empresas que vienen de la competencia.
                             </span>
                           )}
+                          
                         </div>
                       </div>
                     </td>
