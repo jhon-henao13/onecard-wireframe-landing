@@ -92,7 +92,7 @@ const BRAND_LOGOS = [
   };
 
   return (
-    <section className="relative min-h-screen w-full pt-[10rem] max-[600px]:pt-2 pb-[10rem] max-[600px]:pb-48 bg-hero-gradient flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen w-full pt-[8rem] max-[600px]:pt-2 pb-[4rem] max-[600px]:pb-48 bg-hero-gradient flex items-center justify-center overflow-hidden">
       
       {/* Contenedor Principal */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 max-[600px]:gap-12 items-start w-full">
@@ -198,11 +198,11 @@ const BRAND_LOGOS = [
                 y: { duration: 5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }
               }}
               whileHover={{ scale: 1.05, zIndex: 40 }}
-              className="absolute top-[2%] left-[2%] w-[40%] max-[800px]:w-[40%] min-[800px]:w-[50%] h-auto object-contain drop-shadow-xl z-10 cursor-pointer transition-shadow"
+              className="absolute top-[2%] left-[2%] w-[43%] max-[800px]:w-[50%] min-[800px]:w-[53%] h-auto object-contain drop-shadow-xl z-10 cursor-pointer transition-shadow"
             />
 
             {/* 2. Tarjeta Roja (Centro / Gasolina Premium) */}
-            <motion.img 
+            {/* <motion.img 
               src={cardRed} 
               alt="One Card Combustible Roja" 
               initial={{ opacity: 0, x: -20, y: 20 }}
@@ -218,7 +218,7 @@ const BRAND_LOGOS = [
               }}
               whileHover={{ scale: 1.05, zIndex: 40 }}
               className="absolute top-[20%] left-[25%] w-[40%] max-[800px]:w-[40%] min-[800px]:w-[50%] h-auto object-contain drop-shadow-2xl z-20 cursor-pointer transition-shadow"
-            />
+            /> */}
 
             {/* 3. Tarjeta Verde (Frente / Gasolina Magna) */}
             <motion.img 
@@ -236,7 +236,7 @@ const BRAND_LOGOS = [
                 y: { duration: 4.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 1 }
               }}
               whileHover={{ scale: 1.05, zIndex: 40 }}
-              className="absolute top-[35%] left-[50%] w-[40%] max-[800px]:w-[40%] min-[800px]:w-[50%] h-auto object-contain drop-shadow-2xl z-30 cursor-pointer transition-shadow"
+              className="absolute top-[35%] left-[50%] w-[40%] max-[800px]:w-[45%] min-[800px]:w-[50%] h-auto object-contain drop-shadow-2xl z-30 cursor-pointer transition-shadow"
             />
 
             {/* 4. Icono CNBV */}
@@ -272,7 +272,7 @@ const BRAND_LOGOS = [
                 scale: { duration: 0.6, delay: 1 },
                 y: { duration: 4.8, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.7 }
               }}
-              className="absolute top-[16%] right-[13%] w-[13%] max-w-[55px] h-auto object-contain drop-shadow-lg z-20 pointer-events-none"
+              className="absolute top-[16%] right-[17%] w-[15%] max-w-[59px] h-auto object-contain drop-shadow-lg z-20 pointer-events-none"
             />
 
           </div>
@@ -281,7 +281,7 @@ const BRAND_LOGOS = [
       </div>
 
       {/* Logos Section - Carrusel Infinito Interactivo y Deslizable */}
-      <motion.div 
+      {/* <motion.div 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
@@ -292,7 +292,7 @@ const BRAND_LOGOS = [
             + de 2,500 empresas confían en nosotros
           </p>
 
-          {/* Contenedor del Carrusel Arrastrable con Difuminado */}
+          
           <div className="relative w-full overflow-hidden py-2 cursor-grab active:cursor-grabbing [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             <motion.div
               className="flex items-center gap-10 sm:gap-14 md:gap-16 w-max"
@@ -308,7 +308,7 @@ const BRAND_LOGOS = [
               }}
               whileHover={{ animationPlayState: 'paused' }}
             >
-              {/* Duplicamos el arreglo para lograr un bucle infinito fluído y sin saltos */}
+              
               {[...BRAND_LOGOS, ...BRAND_LOGOS].map((brand, index) => (
                 <div
                   key={`${brand.name}-${index}`}
@@ -330,7 +330,7 @@ const BRAND_LOGOS = [
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* POP-UP MODAL (Formulario Extendido) */}
       <AnimatePresence>
