@@ -94,8 +94,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     setStep(2);
   };
 
-  // Validar Step 2 y avanzar a Thank You / Calendly
-  const handleFinalSubmit = (e) => {
+  const handleFinalSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
 
@@ -109,7 +108,49 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       return;
     }
 
-    console.log('Datos del Lead Registrado:', formData);
+    // Mapeo de nombre de Estado al código de 2 letras que exige tu Web-to-Lead
+    const STATE_CODES = {
+      'Aguascalientes': 'AG', 'Baja California': 'BC', 'Baja California Sur': 'BS',
+      'Campeche': 'CM', 'Chiapas': 'CS', 'Chihuahua': 'CH', 'Ciudad de México': 'DF',
+      'Coahuila': 'CO', 'Colima': 'CL', 'Durango': 'DG', 'Estado de México': 'ME',
+      'Guanajuato': 'GT', 'Guerrero': 'GR', 'Hidalgo': 'HG', 'Jalisco': 'JA',
+      'Michoacán': 'MI', 'Morelos': 'MO', 'Nayarit': 'NA', 'Nuevo León': 'NL',
+      'Oaxaca': 'OA', 'Puebla': 'PB', 'Querétaro': 'QE', 'Quintana Roo': 'QR',
+      'San Luis Potosí': 'SL', 'Sinaloa': 'SI', 'Sonora': 'SO', 'Tabasco': 'TB',
+      'Tamaulipas': 'TM', 'Tlaxcala': 'TL', 'Veracruz': 'VE', 'Yucatán': 'YU',
+      'Zacatecas': 'ZA'
+    };
+
+    // Preparar datos para Salesforce Web-to-Lead
+    const salesforceBody = new URLSearchParams();
+    salesforceBody.append('oid', '00DDn000006DZc5');
+    salesforceBody.append('retURL', `${window.location.origin}/gracias`);
+    salesforceBody.append('lead_source', 'Web');
+    salesforceBody.append('first_name', formData.nombre);
+    salesforceBody.append('last_name', formData.apellido);
+    salesforceBody.append('email', formData.email);
+    salesforceBody.append('phone', formData.celular);
+    salesforceBody.append('company', formData.empresa);
+    salesforceBody.append('title', formData.puesto);
+    salesforceBody.append('state_code', STATE_CODES[formData.estado] || '');
+    salesforceBody.append('employees', formData.empleados);
+
+    // Enviar productos y vales en el campo de Descripción
+    const descripcionCustom = `Productos de interés: ${formData.productos.join(', ')} | ¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`;
+    salesforceBody.append('description', descripcionCustom);
+
+    try {
+      await fetch('https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: salesforceBody.toString(),
+        mode: 'no-cors'
+      });
+    } catch (err) {
+      console.error('Error enviando prospecto a Salesforce:', err);
+    }
 
     onClose();
     navigate('/gracias', {
