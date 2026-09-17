@@ -108,13 +108,51 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       return;
     }
 
-    // Mapear rango de empleados a valor entero para Salesforce
+    // Mapeo entero para empleados
     const EMPLOYEES_MAP = {
       '0-10': '10',
       '11-50': '50',
       '50-100': '100',
       '100+': '500'
     };
+
+    // Mapeo exacto de Estados de México a Códigos Estándar de Salesforce
+    const SF_STATE_CODES = {
+      'Aguascalientes': 'AG',
+      'Baja California': 'BC',
+      'Baja California Sur': 'BS',
+      'Campeche': 'CM',
+      'Chiapas': 'CS',
+      'Chihuahua': 'CH',
+      'Ciudad de México': 'DF',
+      'Coahuila': 'CO',
+      'Colima': 'CL',
+      'Durango': 'DG',
+      'Estado de México': 'MX',
+      'Guanajuato': 'GT',
+      'Guerrero': 'GR',
+      'Hidalgo': 'HG',
+      'Jalisco': 'JA',
+      'Michoacán': 'MI',
+      'Morelos': 'MO',
+      'Nayarit': 'NA',
+      'Nuevo León': 'NL',
+      'Oaxaca': 'OA',
+      'Puebla': 'PB',
+      'Querétaro': 'QE',
+      'Quintana Roo': 'QR',
+      'San Luis Potosí': 'SL',
+      'Sinaloa': 'SI',
+      'Sonora': 'SO',
+      'Tabasco': 'TB',
+      'Tamaulipas': 'TM',
+      'Tlaxcala': 'TL',
+      'Veracruz': 'VE',
+      'Yucatán': 'YU',
+      'Zacatecas': 'ZA'
+    };
+
+    const stateCode = SF_STATE_CODES[formData.estado] || '';
 
     // Preparar datos para Salesforce Web-to-Lead
     const salesforceBody = new URLSearchParams();
@@ -126,16 +164,18 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('last_name', formData.apellido);
     salesforceBody.append('email', formData.email);
     
-    // Mapeo de teléfono a ambos campos requeridos por tu Org
+    // Asignación de teléfonos
     salesforceBody.append('phone', formData.celular);
     salesforceBody.append('mobile', formData.celular);
 
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
       
-    // Enviar país y estado como etiquetas limpias (sin códigos ISO conflictivos)
+    // Parámetros de País/Estado para State and Country Picklists
     salesforceBody.append('country', 'Mexico');
+    salesforceBody.append('country_code', 'MX');
     salesforceBody.append('state', formData.estado);
+    salesforceBody.append('state_code', stateCode);
       
     salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
       
