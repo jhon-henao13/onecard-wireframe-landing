@@ -131,6 +131,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     };
 
     // Preparar datos para Salesforce Web-to-Lead
+    // Preparar datos para Salesforce Web-to-Lead
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
@@ -138,15 +139,17 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('first_name', formData.nombre);
     salesforceBody.append('last_name', formData.apellido);
     salesforceBody.append('email', formData.email);
+    
+    // Enviar celular tanto en Teléfono (phone) como en Móvil/Celular (mobile)
     salesforceBody.append('phone', formData.celular);
+    salesforceBody.append('mobile', formData.celular);
+
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
       
-    // Enviar país en inglés o formato ISO para evitar rechazo de tildes/encoding
+    // País y Estado
     salesforceBody.append('country', 'Mexico');
     salesforceBody.append('country_code', 'MX');
-    
-    // Enviar estado y su código equivalente
     salesforceBody.append('state', formData.estado);
     salesforceBody.append('state_code', STATE_CODES[formData.estado] || '');
       
