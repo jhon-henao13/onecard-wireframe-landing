@@ -125,11 +125,11 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       'Chiapas': { name: 'Chiapas', code: 'CS' },
       'Chihuahua': { name: 'Chihuahua', code: 'CH' },
       // ¡ATENCIÓN! Verifica el nombre exacto en tu Salesforce
-      'Ciudad de México': { name: 'CDMX', code: 'CDMX' },
+      'Ciudad de México': { name: 'CDMX', code: 'DF' },
       'Coahuila': { name: 'Coahuila', code: 'CO' },
       'Colima': { name: 'Colima', code: 'CL' },
       'Durango': { name: 'Durango', code: 'DG' },
-      'Estado de México': { name: 'Estado de México', code: 'MX' },
+      'Estado de México': { name: 'Estado de México', code: 'ME' },
       'Guanajuato': { name: 'Guanajuato', code: 'GT' },
       'Guerrero': { name: 'Guerrero', code: 'GR' },
       'Hidalgo': { name: 'Hidalgo', code: 'HG' },
@@ -176,7 +176,6 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     // --- CLAVES PARA PICKLISTS ---
     salesforceBody.append('country_code', 'MX'); // Código ISO de México
     salesforceBody.append('state_code', selectedState.code); // Código del estado
-    salesforceBody.append('state', selectedState.name); // Nombre del estado
     // -----------------------------
 
     salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
