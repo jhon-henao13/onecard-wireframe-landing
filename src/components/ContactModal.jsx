@@ -130,7 +130,6 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     };
 
     // Preparar datos para Salesforce Web-to-Lead
-    // Eliminar la constante STATE_CODES y simplificar el armado de datos:
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
@@ -142,7 +141,8 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
       
-    // Solo enviar el nombre del Estado (ej: "Durango")
+    // Enviar País y Estado para cumplir con la validación de State and Country Picklists
+    salesforceBody.append('country', 'México');
     salesforceBody.append('state', formData.estado);
       
     salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
