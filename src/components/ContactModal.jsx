@@ -108,46 +108,41 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       return;
     }
   
-    const SF_EMPLOYEES_PICKLIST = {
-      '0-10': '10 - 50',    // O el valor exacto que tenga Salesforce para rangos bajos
-      '11-50': '10 - 50',
-      '50-100': '50 - 100',
-      '100+': '100+'
-    };
+
   
     const SF_STATE_DATA = {
-      'Aguascalientes': { name: 'Aguascalientes', code: 'AG' },
-      'Baja California': { name: 'Baja California', code: 'BC' },
-      'Baja California Sur': { name: 'Baja California Sur', code: 'BS' },
-      'Campeche': { name: 'Campeche', code: 'CM' },
-      'Chiapas': { name: 'Chiapas', code: 'CS' },
-      'Chihuahua': { name: 'Chihuahua', code: 'CH' },
-      'Ciudad de México': { name: 'CDMX', code: 'DF' },
-      'Coahuila': { name: 'Coahuila', code: 'CO' },
-      'Colima': { name: 'Colima', code: 'CL' },
-      'Durango': { name: 'Durango', code: 'DG' },
-      'Estado de México': { name: 'Estado de México', code: 'ME' },
-      'Guanajuato': { name: 'Guanajuato', code: 'GT' },
-      'Guerrero': { name: 'Guerrero', code: 'GR' },
-      'Hidalgo': { name: 'Hidalgo', code: 'HG' },
-      'Jalisco': { name: 'Jalisco', code: 'JA' },
-      'Michoacán': { name: 'Michoacán', code: 'MI' },
-      'Morelos': { name: 'Morelos', code: 'MO' },
-      'Nayarit': { name: 'Nayarit', code: 'NA' },
-      'Nuevo León': { name: 'Nuevo León', code: 'NL' },
-      'Oaxaca': { name: 'Oaxaca', code: 'OA' },
-      'Puebla': { name: 'Puebla', code: 'PB' },
-      'Querétaro': { name: 'Querétaro', code: 'QE' },
-      'Quintana Roo': { name: 'Quintana Roo', code: 'QR' },
-      'San Luis Potosí': { name: 'San Luis Potosí', code: 'SL' },
-      'Sinaloa': { name: 'Sinaloa', code: 'SI' },
-      'Sonora': { name: 'Sonora', code: 'SO' },
-      'Tabasco': { name: 'Tabasco', code: 'TB' },
-      'Tamaulipas': { name: 'Tamaulipas', code: 'TM' },
-      'Tlaxcala': { name: 'Tlaxcala', code: 'TL' },
-      'Veracruz': { name: 'Veracruz', code: 'VE' },
-      'Yucatán': { name: 'Yucatán', code: 'YU' },
-      'Zacatecas': { name: 'Zacatecas', code: 'ZA' }
+      'Aguascalientes': { code: 'AG' },
+      'Baja California': { code: 'BC' },
+      'Baja California Sur': { code: 'BS' },
+      'Campeche': { code: 'CM' },
+      'Chiapas': { code: 'CS' },
+      'Chihuahua': { code: 'CH' },
+      'Ciudad de México': { code: 'DF' },
+      'Coahuila': { code: 'CO' },
+      'Colima': { code: 'CL' },
+      'Durango': { code: 'DG' },
+      'Estado de México': { code: 'ME' },
+      'Guanajuato': { code: 'GT' },
+      'Guerrero': { code: 'GR' },
+      'Hidalgo': { code: 'HG' },
+      'Jalisco': { code: 'JA' },
+      'Michoacán': { code: 'MI' },
+      'Morelos': { code: 'MO' },
+      'Nayarit': { code: 'NA' },
+      'Nuevo León': { code: 'NL' },
+      'Oaxaca': { code: 'OA' },
+      'Puebla': { code: 'PB' },
+      'Querétaro': { code: 'QE' },
+      'Quintana Roo': { code: 'QR' },
+      'San Luis Potosí': { code: 'SL' },
+      'Sinaloa': { code: 'SI' },
+      'Sonora': { code: 'SO' },
+      'Tabasco': { code: 'TB' },
+      'Tamaulipas': { code: 'TM' },
+      'Tlaxcala': { code: 'TL' },
+      'Veracruz': { code: 'VE' },
+      'Yucatán': { code: 'YU' },
+      'Zacatecas': { code: 'ZA' }
     };
   
     const selectedState = SF_STATE_DATA[formData.estado];
@@ -158,8 +153,6 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
   
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
-    // ✅ NUEVO: Agregar el recordType
-    salesforceBody.append('recordType', '012QP000001Ak0z');
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
     salesforceBody.append('encoding', 'UTF-8');
     salesforceBody.append('lead_source', 'Web');
@@ -170,19 +163,18 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('mobile', formData.celular);
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
-  
     salesforceBody.append('country_code', 'MX');
     salesforceBody.append('state_code', selectedState.code);
 
-    // 1. Campo Personalizado de Producto (Extraído del correo exitoso)
-    // En Salesforce las listas de selección múltiple suelen separarse por punto y coma.
-    salesforceBody.append('00NQP000000QQlP', formData.productos.join('; '));
+    // Formatear toda la información personalizada en el campo estándar description
+    // Esto garantiza que llegue legible al correo sin generar errores de validación.
+    const descriptionText = [
+      `Número de Empleados: ${formData.empleados}`,
+      `Productos de Interés: ${formData.productos.join(', ')}`,
+      `¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`
+    ].join(' | ');
 
-    // 2. Campo Personalizado de Empleados (Extraído del correo exitoso)
-    salesforceBody.append('00NQP000007m9Mm', SF_EMPLOYEES_PICKLIST[formData.empleados] || '10 - 50');
-
-    // 3. Campo Personalizado de Comentarios/Descripción
-    salesforceBody.append('00NQP000007m9Ml', `¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`);
+    salesforceBody.append('description', descriptionText);
   
     try {
       await fetch('https://webto.salesforce.com/servlet/servlet.WebToLead', {
@@ -396,9 +388,10 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-[#003456] border border-white/15 focus:border-[#00b7eb] focus:outline-none text-white text-sm transition-all"
                   >
-                    <option value="10 - 50">10 - 50 empleados</option>
-                    <option value="50 - 100">50 - 100 empleados</option>
-                    <option value="100+">100+ empleados</option>
+                    <option value="0-10">0 - 10 empleados</option>
+                    <option value="11-50">11 - 50 empleados</option>
+                    <option value="51-100">51 - 100 empleados</option>
+                    <option value="101+">101+ empleados</option>
                   </select>
                   
                 </div>
