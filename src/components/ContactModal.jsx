@@ -108,8 +108,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       return;
     }
 
-
-    // Mapear rango de empleados a un número entero para no romper el tipo de dato de Salesforce
+    // Mapear rango de empleados a valor entero para Salesforce
     const EMPLOYEES_MAP = {
       '0-10': '10',
       '11-50': '50',
@@ -117,41 +116,26 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       '100+': '500'
     };
 
-    // Mapeo oficial de Estados de México a Códigos ISO de 2 letras que exige Salesforce Picklist
-    const STATE_CODES = {
-      'Aguascalientes': 'AG', 'Baja California': 'BC', 'Baja California Sur': 'BS',
-      'Campeche': 'CM', 'Chiapas': 'CS', 'Chihuahua': 'CH', 'Ciudad de México': 'DF',
-      'Coahuila': 'CO', 'Colima': 'CL', 'Durango': 'DG', 'Estado de México': 'ME',
-      'Guanajuato': 'GT', 'Guerrero': 'GR', 'Hidalgo': 'HG', 'Jalisco': 'JA',
-      'Michoacán': 'MI', 'Morelos': 'MO', 'Nayarit': 'NA', 'Nuevo León': 'NL',
-      'Oaxaca': 'OA', 'Puebla': 'PB', 'Querétaro': 'QE', 'Quintana Roo': 'QR',
-      'San Luis Potosí': 'SL', 'Sinaloa': 'SI', 'Sonora': 'SO', 'Tabasco': 'TB',
-      'Tamaulipas': 'TM', 'Tlaxcala': 'TL', 'Veracruz': 'VE', 'Yucatán': 'YU',
-      'Zacatecas': 'ZA'
-    };
-
-    // Preparar datos para Salesforce Web-to-Lead
     // Preparar datos para Salesforce Web-to-Lead
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
+    salesforceBody.append('encoding', 'UTF-8');
     salesforceBody.append('lead_source', 'Web');
     salesforceBody.append('first_name', formData.nombre);
     salesforceBody.append('last_name', formData.apellido);
     salesforceBody.append('email', formData.email);
     
-    // Enviar celular tanto en Teléfono (phone) como en Móvil/Celular (mobile)
+    // Mapeo de teléfono a ambos campos requeridos por tu Org
     salesforceBody.append('phone', formData.celular);
     salesforceBody.append('mobile', formData.celular);
 
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
       
-    // País y Estado
+    // Enviar país y estado como etiquetas limpias (sin códigos ISO conflictivos)
     salesforceBody.append('country', 'Mexico');
-    salesforceBody.append('country_code', 'MX');
     salesforceBody.append('state', formData.estado);
-    salesforceBody.append('state_code', STATE_CODES[formData.estado] || '');
       
     salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
       
@@ -159,7 +143,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('description', descripcionCustom);
 
     try {
-      await fetch('https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8', {
+      await fetch('https://webto.salesforce.com/servlet/servlet.WebToLead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
