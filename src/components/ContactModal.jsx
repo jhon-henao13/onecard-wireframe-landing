@@ -11,7 +11,7 @@ const DISALLOWED_DOMAINS = [
 
 const ESTADOS_MEXICO = [
   'Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas',
-  'Chihuahua', 'Ciudad de México', 'Coahuila', 'Colima', 'Durango', 'Estado de México',
+  'Chihuahua', 'CDMX', 'Coahuila', 'Colima', 'Durango', 'Estado de México',
   'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'Michoacán', 'Morelos', 'Nayarit',
   'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí',
   'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
@@ -163,7 +163,8 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('mobile', formData.celular);
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
-    salesforceBody.append('state_code', selectedState.code);
+    salesforceBody.append('country', 'Mexico');
+    salesforceBody.append('state_code', formData.estado);
 
     // Formatear toda la información personalizada en el campo estándar description
     // Esto garantiza que llegue legible al correo sin generar errores de validación.
