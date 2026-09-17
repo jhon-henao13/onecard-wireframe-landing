@@ -97,26 +97,24 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
   const handleFinalSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
-
+    
     if (!formData.empresa.trim() || !formData.puesto.trim() || !formData.estado) {
       setErrorMsg('Por favor completa todos los campos obligatorios de tu empresa.');
       return;
     }
-
+  
     if (formData.productos.length === 0) {
       setErrorMsg('Por favor selecciona al menos un producto de tu interés.');
       return;
     }
-
-    // Mapeo entero para empleados
+  
     const EMPLOYEES_MAP = {
       '0-10': '10',
       '11-50': '50',
       '50-100': '100',
       '100+': '500'
     };
-
-    // Mapeo exacto de Estados de México a Códigos Estándar de Salesforce
+  
     const SF_STATE_DATA = {
       'Aguascalientes': { name: 'Aguascalientes', code: 'AG' },
       'Baja California': { name: 'Baja California', code: 'BC' },
@@ -124,7 +122,6 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       'Campeche': { name: 'Campeche', code: 'CM' },
       'Chiapas': { name: 'Chiapas', code: 'CS' },
       'Chihuahua': { name: 'Chihuahua', code: 'CH' },
-      // ¡ATENCIÓN! Verifica el nombre exacto en tu Salesforce
       'Ciudad de México': { name: 'CDMX', code: 'DF' },
       'Coahuila': { name: 'Coahuila', code: 'CO' },
       'Colima': { name: 'Colima', code: 'CL' },
@@ -152,16 +149,17 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       'Yucatán': { name: 'Yucatán', code: 'YU' },
       'Zacatecas': { name: 'Zacatecas', code: 'ZA' }
     };
-
+  
     const selectedState = SF_STATE_DATA[formData.estado];
     if (!selectedState) {
       setErrorMsg('El estado seleccionado no es válido. Por favor, contáctanos directamente.');
       return;
     }
-
-    // CONSTRUCCIÓN DEL BODY CORREGIDO
+  
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
+    // ✅ NUEVO: Agregar el recordType
+    salesforceBody.append('recordType', '012QP000001Ak0z');
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
     salesforceBody.append('encoding', 'UTF-8');
     salesforceBody.append('lead_source', 'Web');
@@ -172,26 +170,31 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('mobile', formData.celular);
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
-
-    // --- CLAVES PARA PICKLISTS ---
-    salesforceBody.append('country_code', 'MX'); // Código ISO de México
-    salesforceBody.append('state_code', selectedState.code); // Código del estado
-    // -----------------------------
-
-    // salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
-    // salesforceBody.append('description', `Rango real de empleados: ${formData.empleados} | Productos de interés: ${formData.productos.join(', ')} | ¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`);
-
+  
+    salesforceBody.append('country_code', 'MX');
+    salesforceBody.append('state_code', selectedState.code);
+    
+    // 1. Campo Personalizado de Producto (Extraído del correo exitoso)
+    // En Salesforce las listas de selección múltiple suelen separarse por punto y coma.
+    salesforceBody.append('00NQP000000QQlP', formData.productos.join('; '));
+    
+    // 2. Campo Personalizado de Empleados (Extraído del correo exitoso)
+    salesforceBody.append('00NQP000007m9Mm', formData.empleados);
+    
+    // 3. Campo Personalizado de Comentarios/Descripción
+    salesforceBody.append('00NQP000007m9Ml', `¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`);
+  
     try {
       await fetch('https://webto.salesforce.com/servlet/servlet.WebToLead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: salesforceBody.toString(),
-        mode: 'no-cors' // Esto es OBLIGATORIO para evitar el error de CORS
+        mode: 'no-cors'
       });
     } catch (err) {
       console.error('Error enviando prospecto a Salesforce:', err);
     }
-
+  
     onClose();
     navigate('/gracias', {
       state: { name: `${formData.nombre} ${formData.apellido}`.trim(), email: formData.email }
