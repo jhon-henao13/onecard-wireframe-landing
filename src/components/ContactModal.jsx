@@ -117,45 +117,49 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     };
 
     // Mapeo exacto de Estados de México a Códigos Estándar de Salesforce
-    const SF_STATE_CODES = {
-      'Aguascalientes': 'AG',
-      'Baja California': 'BC',
-      'Baja California Sur': 'BS',
-      'Campeche': 'CM',
-      'Chiapas': 'CS',
-      'Chihuahua': 'CH',
-      'Ciudad de México': 'DF',
-      'Coahuila': 'CO',
-      'Colima': 'CL',
-      'Durango': 'DG',
-      'Estado de México': 'MX',
-      'Guanajuato': 'GT',
-      'Guerrero': 'GR',
-      'Hidalgo': 'HG',
-      'Jalisco': 'JA',
-      'Michoacán': 'MI',
-      'Morelos': 'MO',
-      'Nayarit': 'NA',
-      'Nuevo León': 'NL',
-      'Oaxaca': 'OA',
-      'Puebla': 'PB',
-      'Querétaro': 'QE',
-      'Quintana Roo': 'QR',
-      'San Luis Potosí': 'SL',
-      'Sinaloa': 'SI',
-      'Sonora': 'SO',
-      'Tabasco': 'TB',
-      'Tamaulipas': 'TM',
-      'Tlaxcala': 'TL',
-      'Veracruz': 'VE',
-      'Yucatán': 'YU',
-      'Zacatecas': 'ZA'
+    const SF_STATE_DATA = {
+      'Aguascalientes': { name: 'Aguascalientes', code: 'AG' },
+      'Baja California': { name: 'Baja California', code: 'BC' },
+      'Baja California Sur': { name: 'Baja California Sur', code: 'BS' },
+      'Campeche': { name: 'Campeche', code: 'CM' },
+      'Chiapas': { name: 'Chiapas', code: 'CS' },
+      'Chihuahua': { name: 'Chihuahua', code: 'CH' },
+      // ¡ATENCIÓN! Verifica el nombre exacto en tu Salesforce
+      'Ciudad de México': { name: 'CDMX', code: 'CDMX' },
+      'Coahuila': { name: 'Coahuila', code: 'CO' },
+      'Colima': { name: 'Colima', code: 'CL' },
+      'Durango': { name: 'Durango', code: 'DG' },
+      'Estado de México': { name: 'Estado de México', code: 'MX' },
+      'Guanajuato': { name: 'Guanajuato', code: 'GT' },
+      'Guerrero': { name: 'Guerrero', code: 'GR' },
+      'Hidalgo': { name: 'Hidalgo', code: 'HG' },
+      'Jalisco': { name: 'Jalisco', code: 'JA' },
+      'Michoacán': { name: 'Michoacán', code: 'MI' },
+      'Morelos': { name: 'Morelos', code: 'MO' },
+      'Nayarit': { name: 'Nayarit', code: 'NA' },
+      'Nuevo León': { name: 'Nuevo León', code: 'NL' },
+      'Oaxaca': { name: 'Oaxaca', code: 'OA' },
+      'Puebla': { name: 'Puebla', code: 'PB' },
+      'Querétaro': { name: 'Querétaro', code: 'QE' },
+      'Quintana Roo': { name: 'Quintana Roo', code: 'QR' },
+      'San Luis Potosí': { name: 'San Luis Potosí', code: 'SL' },
+      'Sinaloa': { name: 'Sinaloa', code: 'SI' },
+      'Sonora': { name: 'Sonora', code: 'SO' },
+      'Tabasco': { name: 'Tabasco', code: 'TB' },
+      'Tamaulipas': { name: 'Tamaulipas', code: 'TM' },
+      'Tlaxcala': { name: 'Tlaxcala', code: 'TL' },
+      'Veracruz': { name: 'Veracruz', code: 'VE' },
+      'Yucatán': { name: 'Yucatán', code: 'YU' },
+      'Zacatecas': { name: 'Zacatecas', code: 'ZA' }
     };
 
-    const stateCode = SF_STATE_CODES[formData.estado] || '';
-    const stateValue = formData.estado === 'Ciudad de México' ? 'CDMX' : formData.estado;
+    const selectedState = SF_STATE_DATA[formData.estado];
+    if (!selectedState) {
+      setErrorMsg('El estado seleccionado no es válido. Por favor, contáctanos directamente.');
+      return;
+    }
 
-    // Preparar datos para Salesforce Web-to-Lead
+    // CONSTRUCCIÓN DEL BODY CORREGIDO
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
@@ -164,32 +168,26 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('first_name', formData.nombre);
     salesforceBody.append('last_name', formData.apellido);
     salesforceBody.append('email', formData.email);
-    
-    // Asignación de teléfonos
     salesforceBody.append('phone', formData.celular);
     salesforceBody.append('mobile', formData.celular);
-
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
-      
-    // Parámetros de País/Estado para State and Country Picklists
-    salesforceBody.append('country', 'Mexico');
-    salesforceBody.append('state', stateValue);
-    
-      
+
+    // --- CLAVES PARA PICKLISTS ---
+    salesforceBody.append('country_code', 'MX'); // Código ISO de México
+    salesforceBody.append('state_code', selectedState.code); // Código del estado
+    salesforceBody.append('state', selectedState.name); // Nombre del estado
+    // -----------------------------
+
     salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
-      
-    const descripcionCustom = `Rango real de empleados: ${formData.empleados} | Productos de interés: ${formData.productos.join(', ')} | ¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`;
-    salesforceBody.append('description', descripcionCustom);
+    salesforceBody.append('description', `Rango real de empleados: ${formData.empleados} | Productos de interés: ${formData.productos.join(', ')} | ¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`);
 
     try {
       await fetch('https://webto.salesforce.com/servlet/servlet.WebToLead', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: salesforceBody.toString(),
-        mode: 'no-cors'
+        mode: 'no-cors' // Esto es OBLIGATORIO para evitar el error de CORS
       });
     } catch (err) {
       console.error('Error enviando prospecto a Salesforce:', err);
@@ -197,10 +195,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
 
     onClose();
     navigate('/gracias', {
-      state: {
-        name: `${formData.nombre} ${formData.apellido}`.trim(),
-        email: formData.email
-      }
+      state: { name: `${formData.nombre} ${formData.apellido}`.trim(), email: formData.email }
     });
   };
 
