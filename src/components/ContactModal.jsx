@@ -130,6 +130,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     };
 
     // Preparar datos para Salesforce Web-to-Lead
+    // Eliminar la constante STATE_CODES y simplificar el armado de datos:
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
@@ -140,13 +141,12 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('phone', formData.celular);
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
+      
+    // Solo enviar el nombre del Estado (ej: "Durango")
     salesforceBody.append('state', formData.estado);
-    salesforceBody.append('state_code', STATE_CODES[formData.estado] || '');
-    
-    // Enviar entero numérico compatible
+      
     salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
-
-    // Mapear el rango original, productos y vales en la descripción
+      
     const descripcionCustom = `Rango real de empleados: ${formData.empleados} | Productos de interés: ${formData.productos.join(', ')} | ¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`;
     salesforceBody.append('description', descripcionCustom);
 
