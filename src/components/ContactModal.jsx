@@ -153,6 +153,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     };
 
     const stateCode = SF_STATE_CODES[formData.estado] || '';
+    const stateValue = formData.estado === 'Ciudad de México' ? 'CDMX' : formData.estado;
 
     // Preparar datos para Salesforce Web-to-Lead
     const salesforceBody = new URLSearchParams();
@@ -173,9 +174,8 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       
     // Parámetros de País/Estado para State and Country Picklists
     salesforceBody.append('country', 'Mexico');
-    salesforceBody.append('country_code', 'MX');
-    salesforceBody.append('state', formData.estado);
-    salesforceBody.append('state_code', stateCode);
+    salesforceBody.append('state', stateValue);
+    
       
     salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
       
