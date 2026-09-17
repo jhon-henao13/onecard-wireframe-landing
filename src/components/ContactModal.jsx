@@ -108,7 +108,16 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       return;
     }
 
-    // Mapeo de nombre de Estado al código de 2 letras que exige tu Web-to-Lead
+
+    // Mapear rango de empleados a un número entero para no romper el tipo de dato de Salesforce
+    const EMPLOYEES_MAP = {
+      '0-10': '10',
+      '11-50': '50',
+      '50-100': '100',
+      '100+': '500'
+    };
+
+    // Mapeo oficial de Estados de México a Códigos ISO de 2 letras que exige Salesforce Picklist
     const STATE_CODES = {
       'Aguascalientes': 'AG', 'Baja California': 'BC', 'Baja California Sur': 'BS',
       'Campeche': 'CM', 'Chiapas': 'CS', 'Chihuahua': 'CH', 'Ciudad de México': 'DF',
@@ -119,14 +128,6 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       'San Luis Potosí': 'SL', 'Sinaloa': 'SI', 'Sonora': 'SO', 'Tabasco': 'TB',
       'Tamaulipas': 'TM', 'Tlaxcala': 'TL', 'Veracruz': 'VE', 'Yucatán': 'YU',
       'Zacatecas': 'ZA'
-    };
-
-    // Mapear rango de empleados a un número entero para no romper el tipo de dato de Salesforce
-    const EMPLOYEES_MAP = {
-      '0-10': '10',
-      '11-50': '50',
-      '50-100': '100',
-      '100+': '500'
     };
 
     // Preparar datos para Salesforce Web-to-Lead
@@ -141,9 +142,13 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
       
-    // Enviar País y Estado para cumplir con la validación de State and Country Picklists
-    salesforceBody.append('country', 'México');
+    // Enviar país en inglés o formato ISO para evitar rechazo de tildes/encoding
+    salesforceBody.append('country', 'Mexico');
+    salesforceBody.append('country_code', 'MX');
+    
+    // Enviar estado y su código equivalente
     salesforceBody.append('state', formData.estado);
+    salesforceBody.append('state_code', STATE_CODES[formData.estado] || '');
       
     salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
       
