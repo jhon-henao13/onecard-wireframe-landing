@@ -124,7 +124,8 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     // Preparar datos para Salesforce Web-to-Lead
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
-    salesforceBody.append('retURL', `${window.location.origin}/gracias`);
+    // Actualizado al nuevo dominio oficial
+    salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
     salesforceBody.append('lead_source', 'Web');
     salesforceBody.append('first_name', formData.nombre);
     salesforceBody.append('last_name', formData.apellido);
@@ -132,7 +133,11 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('phone', formData.celular);
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
+    
+    // Se envían ambos campos para garantizar compatibilidad si 'State Picklist' está activo o no
+    salesforceBody.append('state', formData.estado);
     salesforceBody.append('state_code', STATE_CODES[formData.estado] || '');
+    
     salesforceBody.append('employees', formData.empleados);
 
     // Enviar productos y vales en el campo de Descripción
