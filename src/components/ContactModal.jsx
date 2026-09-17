@@ -121,10 +121,17 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       'Zacatecas': 'ZA'
     };
 
+    // Mapear rango de empleados a un número entero para no romper el tipo de dato de Salesforce
+    const EMPLOYEES_MAP = {
+      '0-10': '10',
+      '11-50': '50',
+      '50-100': '100',
+      '100+': '500'
+    };
+
     // Preparar datos para Salesforce Web-to-Lead
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
-    // Actualizado al nuevo dominio oficial
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
     salesforceBody.append('lead_source', 'Web');
     salesforceBody.append('first_name', formData.nombre);
@@ -133,15 +140,14 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('phone', formData.celular);
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
-    
-    // Se envían ambos campos para garantizar compatibilidad si 'State Picklist' está activo o no
     salesforceBody.append('state', formData.estado);
     salesforceBody.append('state_code', STATE_CODES[formData.estado] || '');
     
-    salesforceBody.append('employees', formData.empleados);
+    // Enviar entero numérico compatible
+    salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
 
-    // Enviar productos y vales en el campo de Descripción
-    const descripcionCustom = `Productos de interés: ${formData.productos.join(', ')} | ¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`;
+    // Mapear el rango original, productos y vales en la descripción
+    const descripcionCustom = `Rango real de empleados: ${formData.empleados} | Productos de interés: ${formData.productos.join(', ')} | ¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`;
     salesforceBody.append('description', descripcionCustom);
 
     try {
