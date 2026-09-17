@@ -109,7 +109,6 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     }
   
 
-  
     const SF_STATE_DATA = {
       'Aguascalientes': { code: 'AG' },
       'Baja California': { code: 'BC' },
@@ -153,6 +152,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
   
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
+    salesforceBody.append('recordType', '012QP000001Ak0z');
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
     salesforceBody.append('encoding', 'UTF-8');
     salesforceBody.append('lead_source', 'Web');
@@ -163,7 +163,6 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('mobile', formData.celular);
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
-    salesforceBody.append('country_code', 'MX');
     salesforceBody.append('state_code', selectedState.code);
 
     // Formatear toda la información personalizada en el campo estándar description
