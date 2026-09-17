@@ -178,8 +178,8 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('state_code', selectedState.code); // Código del estado
     // -----------------------------
 
-    salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
-    salesforceBody.append('description', `Rango real de empleados: ${formData.empleados} | Productos de interés: ${formData.productos.join(', ')} | ¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`);
+    // salesforceBody.append('employees', EMPLOYEES_MAP[formData.empleados] || '10');
+    // salesforceBody.append('description', `Rango real de empleados: ${formData.empleados} | Productos de interés: ${formData.productos.join(', ')} | ¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`);
 
     try {
       await fetch('https://webto.salesforce.com/servlet/servlet.WebToLead', {
