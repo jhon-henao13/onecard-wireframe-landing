@@ -152,6 +152,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
   
     const salesforceBody = new URLSearchParams();
     salesforceBody.append('oid', '00DDn000006DZc5');
+    salesforceBody.append('recordType', '012QP000001Ak0z'); // Mantén el recordType
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
     salesforceBody.append('encoding', 'UTF-8');
     salesforceBody.append('lead_source', 'Web');
@@ -162,17 +163,17 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('mobile', formData.celular);
     salesforceBody.append('company', formData.empresa);
     salesforceBody.append('title', formData.puesto);
-    salesforceBody.append('country', 'Mexico');
-    salesforceBody.append('state_code', formData.estado);
-
-    // Formatear toda la información personalizada en el campo estándar description
-    // Esto garantiza que llegue legible al correo sin generar errores de validación.
+      
+    // ✅ CORRECTO: Usar Integration Values, no códigos ISO
+    salesforceBody.append('country_code', 'Mexico'); // Integration Value del país
+    salesforceBody.append('state_code', formData.estado); // Integration Value del estado
+      
     const descriptionText = [
       `Número de Empleados: ${formData.empleados}`,
       `Productos de Interés: ${formData.productos.join(', ')}`,
       `¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`
     ].join(' | ');
-
+    
     salesforceBody.append('description', descriptionText);
   
     try {
