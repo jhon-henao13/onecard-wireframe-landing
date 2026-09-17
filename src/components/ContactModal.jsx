@@ -108,11 +108,11 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       return;
     }
   
-    const EMPLOYEES_MAP = {
-      '0-10': '10',
-      '11-50': '50',
-      '50-100': '100',
-      '100+': '500'
+    const SF_EMPLOYEES_PICKLIST = {
+      '0-10': '10 - 50',    // O el valor exacto que tenga Salesforce para rangos bajos
+      '11-50': '10 - 50',
+      '50-100': '50 - 100',
+      '100+': '100+'
     };
   
     const SF_STATE_DATA = {
@@ -173,14 +173,14 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
   
     salesforceBody.append('country_code', 'MX');
     salesforceBody.append('state_code', selectedState.code);
-    
+
     // 1. Campo Personalizado de Producto (Extraído del correo exitoso)
     // En Salesforce las listas de selección múltiple suelen separarse por punto y coma.
     salesforceBody.append('00NQP000000QQlP', formData.productos.join('; '));
-    
+
     // 2. Campo Personalizado de Empleados (Extraído del correo exitoso)
-    salesforceBody.append('00NQP000007m9Mm', formData.empleados);
-    
+    salesforceBody.append('00NQP000007m9Mm', SF_EMPLOYEES_PICKLIST[formData.empleados] || '10 - 50');
+
     // 3. Campo Personalizado de Comentarios/Descripción
     salesforceBody.append('00NQP000007m9Ml', `¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`);
   
@@ -396,11 +396,11 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl bg-[#003456] border border-white/15 focus:border-[#00b7eb] focus:outline-none text-white text-sm transition-all"
                   >
-                    <option value="0-10">0 - 10 empleados</option>
-                    <option value="11-50">11 - 50 empleados</option>
-                    <option value="50-100">50 - 100 empleados</option>
+                    <option value="10 - 50">10 - 50 empleados</option>
+                    <option value="50 - 100">50 - 100 empleados</option>
                     <option value="100+">100+ empleados</option>
                   </select>
+                  
                 </div>
               </div>
 
