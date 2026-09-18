@@ -166,7 +166,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('title', formData.puesto);
       
     // ✅ CORRECTO: Usar Integration Values, no códigos ISO
-    salesforceBody.append('country_code', 'Mexico'); // Integration Value del país
+    salesforceBody.append('country_code', 'MX'); // Código ISO de México
     salesforceBody.append('state_code', SF_STATE_DATA[formData.estado]); // Integration Value del estado
       
     const descriptionText = [
