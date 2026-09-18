@@ -109,39 +109,40 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     }
   
 
+    // Mapeo de nombre mostrado en el dropdown → Integration Value exacto de Salesforce
     const SF_STATE_DATA = {
-      'Aguascalientes': { code: 'AG' },
-      'Baja California': { code: 'BC' },
-      'Baja California Sur': { code: 'BS' },
-      'Campeche': { code: 'CM' },
-      'Chiapas': { code: 'CS' },
-      'Chihuahua': { code: 'CH' },
-      'Ciudad de México': { code: 'DF' },
-      'Coahuila': { code: 'CO' },
-      'Colima': { code: 'CL' },
-      'Durango': { code: 'DG' },
-      'Estado de México': { code: 'ME' },
-      'Guanajuato': { code: 'GT' },
-      'Guerrero': { code: 'GR' },
-      'Hidalgo': { code: 'HG' },
-      'Jalisco': { code: 'JA' },
-      'Michoacán': { code: 'MI' },
-      'Morelos': { code: 'MO' },
-      'Nayarit': { code: 'NA' },
-      'Nuevo León': { code: 'NL' },
-      'Oaxaca': { code: 'OA' },
-      'Puebla': { code: 'PB' },
-      'Querétaro': { code: 'QE' },
-      'Quintana Roo': { code: 'QR' },
-      'San Luis Potosí': { code: 'SL' },
-      'Sinaloa': { code: 'SI' },
-      'Sonora': { code: 'SO' },
-      'Tabasco': { code: 'TB' },
-      'Tamaulipas': { code: 'TM' },
-      'Tlaxcala': { code: 'TL' },
-      'Veracruz': { code: 'VE' },
-      'Yucatán': { code: 'YU' },
-      'Zacatecas': { code: 'ZA' }
+      'Aguascalientes': 'Aguascalientes',
+      'Baja California': 'Baja California',
+      'Baja California Sur': 'Baja California Sur',
+      'Campeche': 'Campeche',
+      'Chiapas': 'Chiapas',
+      'Chihuahua': 'Chihuahua',
+      'CDMX': 'CDMX',
+      'Coahuila': 'Coahuila',
+      'Colima': 'Colima',
+      'Durango': 'Durango',
+      'Estado de México': 'Estado de México',
+      'Guanajuato': 'Guanajuato',
+      'Guerrero': 'Guerrero',
+      'Hidalgo': 'Hidalgo',
+      'Jalisco': 'Jalisco',
+      'Michoacán': 'Michoacán',
+      'Morelos': 'Morelos',
+      'Nayarit': 'Nayarit',
+      'Nuevo León': 'Nuevo León',
+      'Oaxaca': 'Oaxaca',
+      'Puebla': 'Puebla',
+      'Querétaro': 'Querétaro',
+      'Quintana Roo': 'Quintana Roo',
+      'San Luis Potosí': 'San Luis Potosí',
+      'Sinaloa': 'Sinaloa',
+      'Sonora': 'Sonora',
+      'Tabasco': 'Tabasco',
+      'Tamaulipas': 'Tamaulipas',
+      'Tlaxcala': 'Tlaxcala',
+      'Veracruz': 'Veracruz',
+      'Yucatán': 'Yucatán',
+      'Zacatecas': 'Zacatecas'
     };
   
     const selectedState = SF_STATE_DATA[formData.estado];
@@ -155,7 +156,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('recordType', '012QP000001Ak0z'); // Mantén el recordType
     salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
     salesforceBody.append('encoding', 'UTF-8');
-    salesforceBody.append('lead_source', 'Web');
+    salesforceBody.append('lead_source', 'Website');
     salesforceBody.append('first_name', formData.nombre);
     salesforceBody.append('last_name', formData.apellido);
     salesforceBody.append('email', formData.email);
@@ -166,7 +167,7 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       
     // ✅ CORRECTO: Usar Integration Values, no códigos ISO
     salesforceBody.append('country_code', 'Mexico'); // Integration Value del país
-    salesforceBody.append('state_code', formData.estado); // Integration Value del estado
+    salesforceBody.append('state_code', SF_STATE_DATA[formData.estado]); // Integration Value del estado
       
     const descriptionText = [
       `Número de Empleados: ${formData.empleados}`,
