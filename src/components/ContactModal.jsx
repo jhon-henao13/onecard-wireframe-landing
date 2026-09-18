@@ -111,38 +111,38 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
 
     // Mapeo de nombre mostrado en el dropdown → Integration Value exacto de Salesforce
     const SF_STATE_DATA = {
-      'Aguascalientes': 'Aguascalientes',
-      'Baja California': 'Baja California',
-      'Baja California Sur': 'Baja California Sur',
-      'Campeche': 'Campeche',
-      'Chiapas': 'Chiapas',
-      'Chihuahua': 'Chihuahua',
-      'CDMX': 'CDMX',
-      'Coahuila': 'Coahuila',
-      'Colima': 'Colima',
-      'Durango': 'Durango',
-      'Estado de México': 'Estado de México',
-      'Guanajuato': 'Guanajuato',
-      'Guerrero': 'Guerrero',
-      'Hidalgo': 'Hidalgo',
-      'Jalisco': 'Jalisco',
-      'Michoacán': 'Michoacán',
-      'Morelos': 'Morelos',
-      'Nayarit': 'Nayarit',
-      'Nuevo León': 'Nuevo León',
-      'Oaxaca': 'Oaxaca',
-      'Puebla': 'Puebla',
-      'Querétaro': 'Querétaro',
-      'Quintana Roo': 'Quintana Roo',
-      'San Luis Potosí': 'San Luis Potosí',
-      'Sinaloa': 'Sinaloa',
-      'Sonora': 'Sonora',
-      'Tabasco': 'Tabasco',
-      'Tamaulipas': 'Tamaulipas',
-      'Tlaxcala': 'Tlaxcala',
-      'Veracruz': 'Veracruz',
-      'Yucatán': 'Yucatán',
-      'Zacatecas': 'Zacatecas'
+      'Aguascalientes': 'AG',
+      'Baja California': 'BC',
+      'Baja California Sur': 'BS',
+      'Campeche': 'CM',
+      'Chiapas': 'CS',
+      'Chihuahua': 'CH',
+      'CDMX': 'DF',
+      'Coahuila': 'CO',
+      'Colima': 'CL',
+      'Durango': 'DG',
+      'Estado de México': 'ME',
+      'Guanajuato': 'GT',
+      'Guerrero': 'GR',
+      'Hidalgo': 'HG',
+      'Jalisco': 'JA',
+      'Michoacán': 'MI',
+      'Morelos': 'MO',
+      'Nayarit': 'NA',
+      'Nuevo León': 'NL',
+      'Oaxaca': 'OA',
+      'Puebla': 'PB',
+      'Querétaro': 'QE',
+      'Quintana Roo': 'QR',
+      'San Luis Potosí': 'SL',
+      'Sinaloa': 'SI',
+      'Sonora': 'SO',
+      'Tabasco': 'TB',
+      'Tamaulipas': 'TM',
+      'Tlaxcala': 'TL',
+      'Veracruz': 'VE',
+      'Yucatán': 'YU',
+      'Zacatecas': 'ZA'
     };
   
     const selectedState = SF_STATE_DATA[formData.estado];
@@ -152,30 +152,42 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     }
   
     const salesforceBody = new URLSearchParams();
+
+    // --- Campos estándar (idénticos al form de Salesforce) ---
     salesforceBody.append('oid', '00DDn000006DZc5');
-    salesforceBody.append('recordType', '012QP000001Ak0z'); // Mantén el recordType
-    salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias');
-    salesforceBody.append('encoding', 'UTF-8');
-    salesforceBody.append('lead_source', 'Website');
+    salesforceBody.append('retURL', 'https://soluciones.onecard.mx/gracias/');
     salesforceBody.append('first_name', formData.nombre);
     salesforceBody.append('last_name', formData.apellido);
     salesforceBody.append('email', formData.email);
-    salesforceBody.append('phone', formData.celular);
     salesforceBody.append('mobile', formData.celular);
     salesforceBody.append('company', formData.empresa);
-    salesforceBody.append('title', formData.puesto);
       
-    // ✅ CORRECTO: Usar Integration Values, no códigos ISO
-    salesforceBody.append('country_code', 'MX'); // Código ISO de México
-    salesforceBody.append('state_code', SF_STATE_DATA[formData.estado]); // Integration Value del estado
+    // --- Estado con código ISO (AG, BC, DF, ME...) ---
+    salesforceBody.append('state_code', SF_STATE_DATA[formData.estado]);
       
-    const descriptionText = [
-      `Número de Empleados: ${formData.empleados}`,
-      `Productos de Interés: ${formData.productos.join(', ')}`,
-      `¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`
-    ].join(' | ');
+    // --- Campo personalizado: Número de tarjetas o Empleados ---
+    const SF_EMPLOYEES_MAP = {
+      '0-10': '<10',
+      '11-50': '10 - 50',
+      '51-100': '51 - 100',
+      '101+': '101 - 250'
+    };
+    salesforceBody.append('00NQP000007m9Mm', SF_EMPLOYEES_MAP[formData.empleados] || '<10');
     
-    salesforceBody.append('description', descriptionText);
+    // --- Campo personalizado: Tipo de servicio (múltiple) ---
+    // Se repite la misma key por cada producto seleccionado
+    formData.productos.forEach((prod) => {
+      salesforceBody.append('00NQP000000QQlP', prod);
+    });
+    
+    // --- Campo personalizado: Comentarios adicionales ---
+    salesforceBody.append(
+      '00NQP000007m9Ml',
+      `¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`
+    );
+    
+    // --- Origen del lead (hidden) ---
+    salesforceBody.append('lead_source', 'Website');
   
     try {
       await fetch('https://webto.salesforce.com/servlet/servlet.WebToLead', {
