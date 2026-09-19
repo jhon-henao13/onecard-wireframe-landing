@@ -161,10 +161,10 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
     salesforceBody.append('email', formData.email);
     salesforceBody.append('mobile', formData.celular);
     salesforceBody.append('company', formData.empresa);
-      
+
     // --- Estado con código ISO (AG, BC, DF, ME...) ---
     salesforceBody.append('state_code', SF_STATE_DATA[formData.estado]);
-      
+
     // --- Campo personalizado: Número de tarjetas o Empleados ---
     const SF_EMPLOYEES_MAP = {
       '0-10': '<10',
@@ -173,19 +173,19 @@ const ContactModal = ({ isOpen, onClose, initialEmail = '' }) => {
       '101+': '101 - 250'
     };
     salesforceBody.append('00NQP000007m9Mm', SF_EMPLOYEES_MAP[formData.empleados] || '<10');
-    
+
     // --- Campo personalizado: Tipo de servicio (múltiple) ---
     // Se repite la misma key por cada producto seleccionado
     formData.productos.forEach((prod) => {
       salesforceBody.append('00NQP000000QQlP', prod);
     });
-    
+
     // --- Campo personalizado: Comentarios adicionales ---
-    salesforceBody.append(
-      '00NQP000007m9Ml',
-      `¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`
-    );
-    
+    // salesforceBody.append(
+    //   '00NQP000007m9Ml',
+    //   `¿Ofrecen vales actualmente?: ${formData.ofrecenVales}`
+    // );
+
     // --- Origen del lead (hidden) ---
     salesforceBody.append('lead_source', 'Website');
   
